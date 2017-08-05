@@ -5,7 +5,9 @@
 
     function configuration($routeProvider) {
         $routeProvider
-            .when('/testNutritionix', {
+            .when('/', {
+                templateUrl: 'views/test/templates/test-homepage.view.client.html'
+            }).when('/testNutritionix', {
                 templateUrl: 'views/test/templates/nutritionixTestSearch.view.client.html',
                 controller: 'nutritionixTestSearchController',
                 controllerAs: 'model'
