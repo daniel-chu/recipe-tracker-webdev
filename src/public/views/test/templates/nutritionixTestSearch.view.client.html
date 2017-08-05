@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <h3>Test Search for Nutritionix Api</h3>
+    <div class="input-group">
+        <input ng-model="searchText" type="text" class="form-control">
+        <span class="input-group-btn">
+        <a ng-click="model.searchNutrition(searchText)" class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+        </span>
+    </div>
+    <table class="table" ng-show="model.nutritionFacts">
+        <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Serving Size</th>
+            <th>Calories</th>
+            <th>Carbs</th>
+            <th>Protein</th>
+            <th>Fat</th>
+        </tr>
+        <tr ng-repeat="nutritionFact in model.nutritionFacts">
+            <td>
+                <a href="#!/testNutritionix/nutritionInfo/{{nutritionFact.fields.item_id}}">
+                    {{nutritionFact.fields.item_name}}
+                </a>
+            </td>
+            <td>{{nutritionFact.fields.brand_name}}</td>
+            <td>{{nutritionFact.fields.nf_serving_size_qty}} {{nutritionFact.fields.nf_serving_size_unit}}</td>
+            <td>{{nutritionFact.fields.nf_calories}}</td>
+            <td>{{nutritionFact.fields.nf_total_carbohydrate}}</td>
+            <td>{{nutritionFact.fields.nf_protein}}</td>
+            <td>{{nutritionFact.fields.nf_total_fat}}</td>
+        </tr>
+    </table>
+</div>

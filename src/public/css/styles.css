@@ -1,0 +1,13 @@
+.dc-recipe-picture {
+    margin: 15px 0;
+}
+
+.dc-thumbnail-col {
+    min-width: 100px !important;
+    max-width: 10vw;
+}
+
+.dc-thumbnail-image {
+    max-width: 100%;
+    max-height: 100%;
+}
