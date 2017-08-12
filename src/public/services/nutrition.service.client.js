@@ -1,5 +1,5 @@
 (function() {
-    angular.module('RecipeTracker')
+    angular.module('RecipEat')
         .factory('nutritionService', nutritionService);
 
     function nutritionService($http) {

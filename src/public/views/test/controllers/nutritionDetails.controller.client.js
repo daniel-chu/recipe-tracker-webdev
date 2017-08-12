@@ -1,5 +1,5 @@
 (function() {
-    angular.module('RecipeTracker')
+    angular.module('RecipEat')
         .controller('nutritionDetailsController', nutritionDetailsController);
 
     function nutritionDetailsController($routeParams, nutritionService) {

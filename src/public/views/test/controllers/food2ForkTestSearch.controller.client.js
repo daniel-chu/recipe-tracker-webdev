@@ -1,5 +1,5 @@
 (function() {
-    angular.module('RecipeTracker')
+    angular.module('RecipEat')
         .controller('food2ForkTestSearchController', food2ForkTestSearchController);
 
     function food2ForkTestSearchController(recipeService) {

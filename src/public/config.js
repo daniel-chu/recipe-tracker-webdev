@@ -1,13 +1,23 @@
 (function() {
     angular
-        .module('RecipeTracker')
+        .module('RecipEat')
         .config(configuration);
 
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/test/templates/test-homepage.view.client.html'
-            }).when('/testNutritionix', {
+                templateUrl: 'views/homepage/templates/homepage.view.client.html'
+            })
+            .when('/search/recipe/:recipeSearchText', {
+                templateUrl: 'views/recipeSearch/templates/recipeSearch.view.client.html',
+                controller: 'recipeSearchController',
+                controllerAs: 'model'
+            })
+
+
+
+
+            .when('/testNutritionix', {
                 templateUrl: 'views/test/templates/nutritionixTestSearch.view.client.html',
                 controller: 'nutritionixTestSearchController',
                 controllerAs: 'model'

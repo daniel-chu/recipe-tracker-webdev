@@ -1,41 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="RecipeTracker">
+<html lang="en" ng-app="RecipEat">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+    <title>RecipEat</title>
 
-    <title>RecipeTracker</title>
-
+    <!-- CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="vendor/jquery/jquery-ui.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-
+    
+    <!-- Vendor JS -->
     <script src="vendor/jquery/jquery-3.2.1.js"></script>
     <script src="vendor/jquery/jquery-ui.js"></script>
-
     <script src="vendor/angular/angular.js"></script>
     <script src="vendor/angular/angular-route.js"></script>
+    <script src="vendor/angular/angular-sanitize.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
+    <!-- Application Config Files -->
     <script src="app.js"></script>
     <script src="config.js"></script>
 
+    <!-- Directives -->
+    <script src="directives/recipeat-navbar/recipeat-navbar.js"></script>
+
+    <!-- Services -->
+    <script src="services/user.service.client.js"></script>
     <script src="services/recipe.service.client.js"></script>
     <script src="services/nutrition.service.client.js"></script>
 
+    <!-- Controllers -->
+    <script src="views/recipeSearch/controllers/recipeSearch.controller.client.js"></script>
+
+    <!-- TEST FILES -->
     <script src="views/test/controllers/food2ForkTestSearch.controller.client.js"></script>
     <script src="views/test/controllers/nutritionixTestSearch.controller.client.js"></script>
     <script src="views/test/controllers/recipeDetails.controller.client.js"></script>
     <script src="views/test/controllers/nutritionDetails.controller.client.js"></script>
-
 </head>
 
-<body ng-view>
-
+<body>
+    <recipeat-navbar></recipeat-navbar>
+    <div class="col-md-2"></div>
+    <div ng-view id="recipeat-content-container" class="col-md-8"></div>
+    <div class="col-md-2"></div>
 </body>
+
 </html>

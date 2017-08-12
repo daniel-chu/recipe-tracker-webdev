@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('RecipeTracker', ['ngRoute']);
+        .module('RecipEat', ['ngRoute', 'ngSanitize', 'recipeatDirectives']);
 })();

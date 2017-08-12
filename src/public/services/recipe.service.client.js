@@ -1,5 +1,5 @@
 (function() {
-    angular.module('RecipeTracker')
+    angular.module('RecipEat')
         .factory('recipeService', recipeService);
 
     function recipeService($http) {

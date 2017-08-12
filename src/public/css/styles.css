@@ -1,13 +1,37 @@
+.dc-navbar-recipe-search {
+    display: inline;
+}
+
 .dc-recipe-picture {
     margin: 15px 0;
 }
 
 .dc-thumbnail-col {
-    min-width: 100px !important;
-    max-width: 10vw;
+    padding-top: 5px;
+    padding-right: 0px;
 }
 
 .dc-thumbnail-image {
     max-width: 100%;
     max-height: 100%;
+}
+
+.dc-recipe-search-result {
+    padding: 20px 10px;
+    border-bottom: 1px lightgray solid;
+}
+
+.navbar-default {
+    background: #e95420;
+}
+
+#recipeat-content-container {
+    padding: 60px 0;
+}
+
+@media screen and (min-width: 768px) {
+    #navbar-recipe-search-input {
+        margin-left: 15vw;
+        width: 50vw;
+    }
 }
