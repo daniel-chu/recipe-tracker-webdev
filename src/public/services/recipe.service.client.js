@@ -12,7 +12,6 @@
         return api;
 
         function searchRecipe(searchString, pageNum) {
-            // console.log(pageNum)
             return $http({
                 method: 'GET',
                 url: '/api/food2fork/search',
@@ -21,7 +20,6 @@
                     pageNum: pageNum || 1
                 }
             }).then(function(response) {
-                console.log(response.data);
                 return response.data;
             });
         }
@@ -31,7 +29,6 @@
                 method: 'GET',
                 url: '/api/food2fork/' + recipeId
             }).then(function(response) {
-                console.log(response.data);
                 return response.data;
             });
         }

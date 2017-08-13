@@ -3,16 +3,17 @@
         .module('RecipEat')
         .controller('recipeSearchController', recipeSearchController);
 
-    function recipeSearchController($rootScope, $routeParams, recipeService) {
-        vm = this;
+    function recipeSearchController($rootScope, $routeParams, $location, recipeService) {
+        var vm = this;
         vm.recipeSearchText = $routeParams['recipeSearchText'];
-        // vm.pageNum = $routeParams['pageNum'] || 1;
+        vm.page = parseInt($location.search()['page']) || 1;
+
         $rootScope.recipeSearchText = vm.recipeSearchText;
 
         vm.searchRecipe = searchRecipe;
 
-        function searchRecipe(recipeSearchText) {
-            recipeService.searchRecipe(recipeSearchText)
+        function searchRecipe(recipeSearchText, page) {
+            recipeService.searchRecipe(recipeSearchText, page)
                 .then(function(result) {
                     renderRecipes(result.recipes);
                 });
@@ -23,7 +24,7 @@
         }
 
         function init() {
-            searchRecipe(vm.recipeSearchText, vm.pageNum);
+            searchRecipe(vm.recipeSearchText, vm.page);
         }
 
         init();

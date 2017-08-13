@@ -72,6 +72,8 @@
 }
 
 
+
+
 /* start 'enter' transition on main view */
 
 #recipeat-content-container.ng-enter {
@@ -82,7 +84,6 @@
     opacity: 0;
 }
 
-
 /* end 'enter' transition on main view */
 
 #recipeat-content-container.ng-enter-active {
@@ -90,13 +91,22 @@
     opacity: 1;
 }
 
-
 .recipe-picture {
     margin: 15px 0;
 }
 
 .recipe-search-button-container {
-    text-align: right;
+    position: relative;
+    margin-top: 10px;
+    height: 40px;
+}
+
+.recipe-search-next-button {
+    float: right;
+}
+
+.recipe-search-prev-button {
+    float: left;
 }
 
 .recipe-search-result {
@@ -105,9 +115,13 @@
     opacity: 1;
 }
 
+.row {
+    margin: 0 -10px;
+}
+
 .search-result-publisher-text {
     float: left;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .navbar-brand,
@@ -146,6 +160,14 @@
     }
 
     .thumbnail-image {
+        max-width: 30vw;
+    }
+
+    .search-results-container h4 {
+        margin-top: 0px;
+    }
+
+    .search-result-publisher-text {
         max-width: 30vw;
     }
 }

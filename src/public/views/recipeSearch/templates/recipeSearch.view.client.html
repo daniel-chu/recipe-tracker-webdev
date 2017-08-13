@@ -1,8 +1,24 @@
 <div class="col-sm-2"></div>
 <div class="col-sm-8 content-panel">
     <div class="container-fluid">
-        <h2 class="visible-md">Search Results for "{{model.recipeSearchText}}"</h2>
-        <h3 class="hidden-md">Search Results for "{{model.recipeSearchText}}"</h3>
+        <h2 class="visible-md">Search Results for "{{model.recipeSearchText}}" - page {{model.page}}</h2>
+        <h3 class="hidden-md">Search Results for "{{model.recipeSearchText}}" - page {{model.page}}</h3>
+
+        <div ng-show="model.recipes.length > 5" class="recipe-search-button-container">
+            <a ng-hide="model.page === 1" class="recipe-search-prev-button btn btn-sm btn-primary"
+            role="button" href="#!/search/recipe/{{model.recipeSearchText}}?page={{model.page-1}}">Previous Page</a>
+
+            <a ng-show="model.page === 1"
+               class="disabled recipe-search-prev-button btn btn-sm btn-primary"
+               role="button"">Previous Page</a>
+
+            <a ng-hide="model.recipes.length != 30" class="recipe-search-next-button btn btn-sm btn-primary"
+            role="button" href="#!/search/recipe/{{model.recipeSearchText}}?page={{model.page+1}}">Next Page</a>
+
+            <a ng-show="model.recipes.length != 30"
+               class="disabled recipe-search-next-button btn btn-sm btn-primary"
+               role="button">Next Page</a>
+        </div>
 
         <div class="search-results-container">
             <div class="row recipe-search-result" ng-show="model.recipes" ng-repeat="recipe in model.recipes">
@@ -26,9 +42,22 @@
                     </div>
                 </div>
             </div>
-            <div class="recipe-search-button-container">
-                <a class="btn btn-sm btn-primary" role="button"">Next Page</a>
-            </div>
+        </div>
+
+        <div class="recipe-search-button-container">
+            <a ng-hide="model.page === 1" class="recipe-search-prev-button btn btn-sm btn-primary"
+            role="button" href="#!/search/recipe/{{model.recipeSearchText}}?page={{model.page-1}}">Previous Page</a>
+
+            <a ng-show="model.page === 1"
+               class="disabled recipe-search-prev-button btn btn-sm btn-primary"
+               role="button"">Previous Page</a>
+
+            <a ng-hide="model.recipes.length != 30" class="recipe-search-next-button btn btn-sm btn-primary"
+            role="button" href="#!/search/recipe/{{model.recipeSearchText}}?page={{model.page+1}}">Next Page</a>
+
+            <a ng-show="model.recipes.length != 30"
+               class="disabled recipe-search-next-button btn btn-sm btn-primary"
+               role="button">Next Page</a>
         </div>
     </div>
 </div>

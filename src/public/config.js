@@ -71,7 +71,11 @@
                 templateUrl: 'views/test/templates/recipeDetails.view.client.html',
                 controller: 'recipeDetailsController',
                 controllerAs: 'model'
-            });
+            })
+            .otherwise({
+                templateUrl: 'views/error/templates/pageNotFound.view.client.html'
+            })
+
     }
 
     function isNotLoggedIn($rootScope, $location, userService) {
