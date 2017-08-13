@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
+
         <div class="navbar-header">
             <a class="navbar-brand" href="#">RecipEat</a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-navigationbar">
@@ -8,34 +9,42 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse" id="collapsible-navigationbar">
 
+        <div class="collapse navbar-collapse" id="collapsible-navigationbar">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="profile" class="nav-bar-page-tab">
+                <li ng-show="loggedIn">
+                    <a href="#!/profile" class="nav-bar-page-tab">
                         <span class="glyphicon glyphicon-user"></span>
                         <span id="nav-bar-user-name"></span>
                     </a>
                 </li>
+                <li ng-hide="loggedIn" ng-click="redirectToLogin()">
+                    <a class="nav-bar-page-tab">Login</a>
+                </li>
+                <li ng-hide="loggedIn" ng-click="redirectToRegister()">
+                    <a class="nav-bar-page-tab">Register</a>
+                </li>
             </ul>
 
             <form class="navbar-form">
-                <div class="dc-navbar-recipe-search form-group">
+                <div class="navbar-recipe-search form-group">
+
                     <div class="input-group">
                         <input id="navbar-recipe-search-input"
-                               ng-model="searchText" 
+                               ng-model="recipeSearchText"
                                type="text"
                                class="form-control"
                                placeholder="Search for a recipe...">
-                        <span id="navbar-search-recipe-button" class="input-group-btn">
-                            <a class="btn btn-default"
-                               type="button">
+                        <span id="navbar-recipe-search-button" class="input-group-btn" ng-click="searchRecipe()">
+                            <a class="btn btn-default" type="button">
                                <span class="glyphicon glyphicon-search"></span>
                             </a>
                         </span>
                     </div>
+
                 </div>
             </form>
+
         </div>
     </div>
 </nav>

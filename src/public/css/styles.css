@@ -1,37 +1,151 @@
-.dc-navbar-recipe-search {
-    display: inline;
+.content-panel {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 5px;
+
+    transition: max-height 1s;
+    padding: 0px 10px 10px;
+    margin: 0px 15px 15px;
 }
 
-.dc-recipe-picture {
-    margin: 15px 0;
+.container-fluid>.row {
+    margin: 7px 5px;
 }
 
-.dc-thumbnail-col {
-    padding-top: 5px;
-    padding-right: 0px;
+.fading-popup-message {
+    display: none;
+    width: 70%;
+    text-align: center;
+    position: absolute;
+    z-index: 999;
+    left: 50%;
+    top: 65px;
+    -ms-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
 }
 
-.dc-thumbnail-image {
-    max-width: 100%;
-    max-height: 100%;
+.float-left {
+    float: left;
 }
 
-.dc-recipe-search-result {
-    padding: 20px 10px;
-    border-bottom: 1px lightgray solid;
+#main-panel {
+    background-image: url("../assets/images/homepage_background.jpg"), linear-gradient(to bottom, black 20%, white 100%);
+    background-blend-mode: lighten;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 500px;
+    opacity: 1;
+    margin-top: 50px;
+}
+
+#landing-page {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    padding: 10px 28px;
+}
+
+#landing-page>h1 {
+    font-size: 60px;
+    margin-top: 5px;
+}
+
+#landing-page>h1,
+#landing-page>h2,
+#landing-page>h3 {
+    color: white;
+    outline-color: black;
+    text-shadow: #000 0px 0px 4px;
 }
 
 .navbar-default {
     background: #e95420;
 }
 
+.navbar-recipe-search {
+    display: inline;
+}
+
 #recipeat-content-container {
-    padding: 60px 0;
+    padding: 15px;
+}
+
+
+/* start 'enter' transition on main view */
+
+#recipeat-content-container.ng-enter {
+    /* transition on enter for .5s */
+    transition: .6s;
+
+    /* start with opacity 0 (invisible) */
+    opacity: 0;
+}
+
+
+/* end 'enter' transition on main view */
+
+#recipeat-content-container.ng-enter-active {
+    /* end with opacity 1 (fade in) */
+    opacity: 1;
+}
+
+
+.recipe-picture {
+    margin: 15px 0;
+}
+
+.recipe-search-button-container {
+    text-align: right;
+}
+
+.recipe-search-result {
+    padding: 10px 10px;
+    border-top: 1px lightgray solid;
+    opacity: 1;
+}
+
+.search-result-publisher-text {
+    float: left;
+    margin-left: 10px;
+}
+
+.navbar-brand,
+.nav-bar-page-tab {
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+.thumbnail-col {
+    padding-top: 5px;
+    padding-right: 0px;
+}
+
+.thumbnail-image {
+    border: 1px solid darkgray;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 @media screen and (min-width: 768px) {
     #navbar-recipe-search-input {
         margin-left: 15vw;
         width: 50vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #landing-page {
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        padding: 10px 18px;
+    }
+
+    #landing-page>h1 {
+        font-size: 48px;
+    }
+
+    .thumbnail-image {
+        max-width: 30vw;
     }
 }

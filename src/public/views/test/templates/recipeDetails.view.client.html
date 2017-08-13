@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <h1>{{model.recipe.title}}</h1>
     <p>Created by {{model.recipe.publisher}}</p>
-    <img ng-src={{model.recipe.image_url}} class="dc-recipe-picture" alt="recipe picture"/>
+    <img ng-src={{model.recipe.image_url}} class="recipe-picture" alt="recipe picture"/>
     <p> Ingredients </p>
     <table class="table">
         <tr ng-repeat="ingredient in model.recipe.ingredients">

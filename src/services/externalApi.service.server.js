@@ -8,8 +8,9 @@ app.get('/api/nutritionix/:nid', getNutritionixItem);
 
 function searchFood2Fork(req, res) {
     var searchString = req.query.searchString;
+    var pageNum = req.query.pageNum
     var url = 'http://food2fork.com/api/search';
-    url += '?key=' + process.env.F2F_APIKEY + '&q=' + searchString + '&sort=r';
+    url += '?key=' + process.env.F2F_APIKEY + '&q=' + searchString + '&sort=r&page=' + pageNum;
 
     request({
         method: 'GET',

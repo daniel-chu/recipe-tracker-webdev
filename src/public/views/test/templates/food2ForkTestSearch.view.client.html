@@ -10,14 +10,14 @@
     </div>
     <table class="table" ng-show="model.recipes">
         <tr>
-            <th class="dc-thumbnail-col">Thumbnail</th>
+            <th class="thumbnail-col">Thumbnail</th>
             <th>Title</th>
             <th>Publisher</th>
             <th>Popularity</th>
         </tr>
         <tr ng-repeat="recipe in model.recipes">
-            <td class="dc-thumbnail-col">
-                <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="dc-thumbnail-image" />
+            <td class="thumbnail-col">
+                <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="thumbnail-image" />
             </td>
             <td>
                 <a href="#!/testFood2Fork/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>

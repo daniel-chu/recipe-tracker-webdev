@@ -11,12 +11,14 @@
 
         return api;
 
-        function searchRecipe(searchString) {
+        function searchRecipe(searchString, pageNum) {
+            // console.log(pageNum)
             return $http({
                 method: 'GET',
                 url: '/api/food2fork/search',
                 params: {
-                    searchString: searchString
+                    searchString: searchString,
+                    pageNum: pageNum || 1
                 }
             }).then(function(response) {
                 console.log(response.data);

@@ -1,7 +1,29 @@
 (function() {
     angular
         .module('RecipEat')
-        .config(configuration);
+        .config(configuration)
+        .run(function($rootScope, $location) {
+            $('.fading-popup-message .close').on('click', function() {
+                $('.fading-popup-message').stop({ clearQueue: true }).fadeOut(200);
+            });
+
+            $rootScope.displayFadeWarning = function(message) {
+                console.log(message)
+                var $warningMessage = $('#fading-warning-message');
+                $warningMessage.hide().stop({ clearQueue: true });
+
+                $('#fading-warning-message p').text(message);
+                $warningMessage.fadeIn(2000, function() {
+                    $warningMessage.delay(5000).fadeOut(2000);
+                })
+            }
+
+            $rootScope.$on('$routeChangeStart', function(event, next, current) {
+                if ($('#collapsible-navigationbar').hasClass('collapse in')) {
+                    $('.navbar-toggle').click();
+                };
+            });
+        });
 
     function configuration($routeProvider) {
         $routeProvider
@@ -12,6 +34,22 @@
                 templateUrl: 'views/recipeSearch/templates/recipeSearch.view.client.html',
                 controller: 'recipeSearchController',
                 controllerAs: 'model'
+            })
+            .when('/login', {
+                templateUrl: 'views/user/templates/login.view.client.html',
+                controller: 'loginController',
+                controllerAs: 'model',
+                resolve: {
+                    asdf: isNotLoggedIn
+                }
+            })
+            .when('/register', {
+                templateUrl: 'views/user/templates/register.view.client.html',
+                controller: 'registerController',
+                controllerAs: 'model',
+                resolve: {
+                    asdf: isNotLoggedIn
+                }
             })
 
 
@@ -34,6 +72,17 @@
                 controller: 'recipeDetailsController',
                 controllerAs: 'model'
             });
+    }
+
+    function isNotLoggedIn($rootScope, $location, userService) {
+        return userService.getLoggedInUser()
+            .then(function(user) {
+                if (user) {
+                    $location.url('');
+                    $rootScope.displayFadeWarning('You are already logged in.')
+                    return true;
+                }
+            })
     }
 
 })();

@@ -3,23 +3,54 @@
         .directive('recipeatNavbar', ['$location', 'userService', recipeatNavbar]);
 
     function recipeatNavbar($location, userService) {
-        return {
-            templateUrl: 'directives/recipeat-navbar/recipeat-navbar.html',
-            link: function(scope, elem, attrs) {
-                $('#navbar-search-recipe-button').on('click', function() {
-                    scope.$apply(function() {
-                        $location.url('/search/recipe/' + scope.searchText);
-                        if ($('#collapsible-navigationbar').hasClass('collapse in')) {
-                            $('.navbar-toggle').click();
+
+        var controller = function($scope, $rootScope, $location) {
+            $scope.searchRecipe = searchRecipe;
+            $scope.redirectToLogin = redirectToLogin;
+            $scope.redirectToRegister = redirectToRegister;
+
+            $scope.$watch('loggedIn', function() {
+                if ($rootScope.loggedIn) {
+                    userService.getLoggedInUser().then(function(user) {
+                        if (user) {
+                            $('#nav-bar-user-name').text(user.username);
                         }
                     });
-                });
+                }
+            });
 
-                userService.getLoggedInUser().then(function(user) {
-                    $('#nav-bar-user-name').text(user.username);
+            function searchRecipe() {
+                if ($scope.recipeSearchText) {
+                    $location.url('/search/recipe/' + $scope.recipeSearchText);
+                }
+            }
+
+            function redirectToLogin() {
+                $rootScope.previousUrl = $location.url();
+                $location.url('/login');
+            }
+
+            function redirectToRegister() {
+                $rootScope.previousUrl = $location.url();
+                $location.url('/register');
+            }
+
+
+        }
+
+        return {
+            controller: controller,
+            templateUrl: 'directives/recipeat-navbar/recipeat-navbar.html',
+            link: function(scope, element, attrs) {
+                $('#navbar-recipe-search-input').on('keydown', function(event) {
+                    if(event.which === 13) {
+                        scope.searchRecipe();
+                    }
                 });
             }
         }
     }
+
+
 
 })();

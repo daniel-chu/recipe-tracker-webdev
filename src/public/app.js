@@ -1,4 +1,4 @@
-(function () {
+(function() {
     angular
-        .module('RecipEat', ['ngRoute', 'ngSanitize', 'recipeatDirectives']);
+        .module('RecipEat', ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'ngSanitize', 'recipeatDirectives']);
 })();

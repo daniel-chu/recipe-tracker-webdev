@@ -5,19 +5,23 @@
     function userService($location, $http) {
 
         var api = {
-            getLoggedInUser: getLoggedInUser
+            getLoggedInUser: getLoggedInUser,
+            setLoggedInUser: setLoggedInUser
         }
 
         return api;
 
+        var curUser;
+
         function getLoggedInUser() {
-            var testUser = {
-                username: 'testUser',
-                firstName: 'Test',
-                lastName: 'User'
-            }
-            
-            return Promise.resolve(testUser);
+            return Promise.resolve(curUser);
         }
+
+        //TODO temporarily here for the prototype
+        function setLoggedInUser(userInfo) {
+            curUser = userInfo;
+            return Promise.resolve(curUser);
+        }
+
     }
 })();

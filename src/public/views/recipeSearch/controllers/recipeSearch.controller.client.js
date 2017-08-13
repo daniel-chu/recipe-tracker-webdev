@@ -3,9 +3,11 @@
         .module('RecipEat')
         .controller('recipeSearchController', recipeSearchController);
 
-    function recipeSearchController($routeParams, recipeService) {
+    function recipeSearchController($rootScope, $routeParams, recipeService) {
         vm = this;
         vm.recipeSearchText = $routeParams['recipeSearchText'];
+        // vm.pageNum = $routeParams['pageNum'] || 1;
+        $rootScope.recipeSearchText = vm.recipeSearchText;
 
         vm.searchRecipe = searchRecipe;
 
@@ -21,8 +23,7 @@
         }
 
         function init() {
-            $('#navbar-recipe-search-input').val(vm.recipeSearchText);
-            searchRecipe(vm.recipeSearchText);
+            searchRecipe(vm.recipeSearchText, vm.pageNum);
         }
 
         init();

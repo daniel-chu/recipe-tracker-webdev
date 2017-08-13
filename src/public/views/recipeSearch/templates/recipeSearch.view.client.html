@@ -1,19 +1,35 @@
-<!--         <td>{{recipe.publisher}}</td>
-        <td>{{recipe.social_rank}}</td> -->
+<div class="col-sm-2"></div>
+<div class="col-sm-8 content-panel">
+    <div class="container-fluid">
+        <h2 class="visible-md">Search Results for "{{model.recipeSearchText}}"</h2>
+        <h3 class="hidden-md">Search Results for "{{model.recipeSearchText}}"</h3>
 
-<div class="container-fluid">
-    <h2 class="visible-md">Search Results for "{{model.recipeSearchText}}"</h2>
-    <h3 class="hidden-md">Search Results for "{{model.recipeSearchText}}"</h3>
+        <div class="search-results-container">
+            <div class="row recipe-search-result" ng-show="model.recipes" ng-repeat="recipe in model.recipes">
+                <div class="visible-xs">
+                    <div class="row">
+                        <a href="#!/testFood2Fork/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
+                    </div>
+                    <div class="row">
+                        <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="thumbnail-image float-left" />
+                        <p class="search-result-publisher-text">by {{recipe.publisher}}</p>
+                    </div>
+                </div>
 
-    <div class="search-results-container">
-        <div class="row dc-recipe-search-result" ng-repeat="recipe in model.recipes">
-            <div class="col-xs-3 dc-thumbnail-col">
-                <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="dc-thumbnail-image" />
+                <div class="hidden-xs">
+                    <div class="col-xs-3 thumbnail-col">
+                        <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="thumbnail-image" />
+                    </div>
+                    <div class="col-md-6 col-xs-9">
+                        <a href="#!/testFood2Fork/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
+                        <p>by {{recipe.publisher}}</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-6 col-xs-9">
-                <a href="#!/testFood2Fork/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
-                <p>by {{recipe.publisher}}</p>
+            <div class="recipe-search-button-container">
+                <a class="btn btn-sm btn-primary" role="button"">Next Page</a>
             </div>
         </div>
     </div>
 </div>
+<div class="col-sm-2"></div>

@@ -9,36 +9,32 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>RecipEat</title>
-
     <!-- CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="vendor/jquery/jquery-ui.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-    
     <!-- Vendor JS -->
     <script src="vendor/jquery/jquery-3.2.1.js"></script>
     <script src="vendor/jquery/jquery-ui.js"></script>
     <script src="vendor/angular/angular.js"></script>
     <script src="vendor/angular/angular-route.js"></script>
     <script src="vendor/angular/angular-sanitize.js"></script>
+    <script src="vendor/angular/angular-animate.js"></script>
+    <script src="vendor/angular-ui/dist/ui-bootstrap-tpls.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
     <!-- Application Config Files -->
     <script src="app.js"></script>
     <script src="config.js"></script>
-
     <!-- Directives -->
     <script src="directives/recipeat-navbar/recipeat-navbar.js"></script>
-
     <!-- Services -->
     <script src="services/user.service.client.js"></script>
     <script src="services/recipe.service.client.js"></script>
     <script src="services/nutrition.service.client.js"></script>
-
     <!-- Controllers -->
     <script src="views/recipeSearch/controllers/recipeSearch.controller.client.js"></script>
-
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
     <!-- TEST FILES -->
     <script src="views/test/controllers/food2ForkTestSearch.controller.client.js"></script>
     <script src="views/test/controllers/nutritionixTestSearch.controller.client.js"></script>
@@ -48,9 +44,13 @@
 
 <body>
     <recipeat-navbar></recipeat-navbar>
-    <div class="col-md-2"></div>
-    <div ng-view id="recipeat-content-container" class="col-md-8"></div>
-    <div class="col-md-2"></div>
+    <div id="main-panel">
+        <div id="fading-warning-message" class="alert alert-dismissable alert-warning fading-popup-message">
+            <button type="button" class="close">&times;</button>
+            <p></p>
+        </div>
+        <div id="recipeat-content-container" ng-view></div>
+    </div>
 </body>
 
 </html>
