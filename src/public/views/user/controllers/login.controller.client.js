@@ -7,18 +7,20 @@
         vm.login = login;
 
         function login(userInfo) {
-            console.log('LOGGING IN WITH USERNAME: ' + userInfo.username + '\nPASSWORD: ' + userInfo.password);
+            if (userInfo) {
+                console.log('LOGGING IN WITH USERNAME: ' + userInfo.username + '\nPASSWORD: ' + userInfo.password);
 
-            userService.setLoggedInUser(userInfo)
-                .then(function(user) {
-                    if (user) {
-                        $rootScope.loggedIn = true;
-                        var returnUrl = $rootScope.previousUrl || "";
-                        $location.url(returnUrl);
+                userService.setLoggedInUser(userInfo)
+                    .then(function(user) {
+                        if (user) {
+                            $rootScope.loggedIn = true;
+                            var returnUrl = $rootScope.previousUrl || "";
+                            $location.url(returnUrl);
 
-                        $rootScope.$apply();
-                    }
-                });
+                            $rootScope.$apply();
+                        }
+                    });
+            }
         }
 
     }

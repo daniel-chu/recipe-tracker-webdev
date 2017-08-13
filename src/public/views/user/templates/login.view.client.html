@@ -7,7 +7,8 @@
                    ng-model="model.userInfo.username"
                    name="username"
                    class="form-control"
-                   placeholder="username"/>
+                   placeholder="username"
+                   dc-on-enter="model.login(model.userInfo)"/>
         </div>
 
         <div class="row">
@@ -16,7 +17,8 @@
                    name="password"
                    type="password"
                    class="form-control"
-                   placeholder="password"/>
+                   placeholder="password"
+                   dc-on-enter="model.login(model.userInfo)"/>
         </div>
 
         <div class="row">

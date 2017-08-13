@@ -34,7 +34,8 @@
                                ng-model="recipeSearchText"
                                type="text"
                                class="form-control"
-                               placeholder="Search for a recipe...">
+                               placeholder="Search for a recipe..."
+                               dc-on-enter="searchRecipe()">
                         <span id="navbar-recipe-search-button" class="input-group-btn" ng-click="searchRecipe()">
                             <a class="btn btn-default" type="button">
                                <span class="glyphicon glyphicon-search"></span>

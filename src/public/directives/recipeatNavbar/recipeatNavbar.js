@@ -40,14 +40,7 @@
 
         return {
             controller: controller,
-            templateUrl: 'directives/recipeat-navbar/recipeat-navbar.html',
-            link: function(scope, element, attrs) {
-                $('#navbar-recipe-search-input').on('keydown', function(event) {
-                    if(event.which === 13) {
-                        scope.searchRecipe();
-                    }
-                });
-            }
+            templateUrl: 'directives/recipeatNavbar/recipeatNavbar.html'
         }
     }
 
