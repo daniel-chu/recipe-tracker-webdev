@@ -4,13 +4,14 @@
 
     function recipeDetailsController($routeParams, recipeService) {
         vm = this;
-        vm.recipeId = $routeParams['rid'];
+        vm.recipeId = $routeParams['recipeId'];
         
         function init() {
-            recipeService.getRecipeFromF2F(vm.recipeId).then(function(result) {
+            recipeService.getRecipeDetails(vm.recipeId).then(function(result) {
                 vm.recipe = result.recipe;
             });
         }
+
         init();
     }
 

@@ -28,6 +28,16 @@
     float: left;
 }
 
+.ingredients-list {
+    max-width: 65vw;
+    text-align: left;
+    padding: 0;
+}
+
+.ingredients-list ul {
+    padding-left: 20px;
+}
+
 #main-panel {
     background-image: url("../assets/images/homepage_background.jpg"), linear-gradient(to bottom, black 20%, white 100%);
     background-blend-mode: lighten;
@@ -63,13 +73,11 @@
     background: #e95420;
 }
 
-.navbar-recipe-search {
-    display: inline;
-}
-
 #recipeat-content-container {
     padding: 15px;
 }
+
+
 
 
 
@@ -84,6 +92,13 @@
     opacity: 0;
 }
 
+
+
+
+
+
+
+
 /* end 'enter' transition on main view */
 
 #recipeat-content-container.ng-enter-active {
@@ -91,8 +106,19 @@
     opacity: 1;
 }
 
+.recipe-details-panel {
+    text-align: center;
+}
+
+.recipe-details-panel .recipe-picture {
+    margin: 0;
+    padding: 0;
+}
+
 .recipe-picture {
-    margin: 15px 0;
+    display: inline-block;
+    max-width: 90%;
+    max-height: 80vh;
 }
 
 .recipe-search-button-container {
@@ -119,6 +145,10 @@
     margin: 0 -10px;
 }
 
+.search-results-container {
+    padding-bottom: 10px;
+}
+
 .search-result-publisher-text {
     float: left;
     margin-left: 15px;
@@ -141,8 +171,11 @@
 }
 
 @media screen and (min-width: 768px) {
+    #navbar-search-form {
+        text-align: center;
+    }
+
     #navbar-recipe-search-input {
-        margin-left: 15vw;
         width: 50vw;
     }
 }
@@ -169,5 +202,20 @@
 
     .search-result-publisher-text {
         max-width: 30vw;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .ingredients-list h2,
+    .ingredients-list h3 {
+        margin-top: 5px;
+    }
+
+    .recipe-picture {
+        text-align: right;
+    }
+
+    .recipe-picture .recipe-picture {
+        margin-right: 15px;
     }
 }

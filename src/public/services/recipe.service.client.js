@@ -6,7 +6,7 @@
 
         var api = {
             searchRecipe: searchRecipe,
-            getRecipeFromF2F: getRecipeFromF2F
+            getRecipeDetails: getRecipeDetails
         }
 
         return api;
@@ -24,11 +24,12 @@
             });
         }
 
-        function getRecipeFromF2F(recipeId) {
+        function getRecipeDetails(recipeId) {
             return $http({
                 method: 'GET',
                 url: '/api/food2fork/' + recipeId
             }).then(function(response) {
+                console.log(response);
                 return response.data;
             });
         }

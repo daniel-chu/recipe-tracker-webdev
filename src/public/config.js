@@ -2,7 +2,7 @@
     angular
         .module('RecipEat')
         .config(configuration)
-        .run(function($rootScope, $location) {
+        .run(function($rootScope, $location, $window) {
             $('.fading-popup-message .close').on('click', function() {
                 $('.fading-popup-message').stop({ clearQueue: true }).fadeOut(200);
             });
@@ -22,6 +22,7 @@
                 if ($('#collapsible-navigationbar').hasClass('collapse in')) {
                     $('.navbar-toggle').click();
                 };
+                $window.scrollTo(0, 0);
             });
         });
 
@@ -31,7 +32,7 @@
                 templateUrl: 'views/homepage/templates/homepage.view.client.html'
             })
             .when('/search/recipe/:recipeSearchText', {
-                templateUrl: 'views/recipeSearch/templates/recipeSearch.view.client.html',
+                templateUrl: 'views/recipe/templates/recipeSearch.view.client.html',
                 controller: 'recipeSearchController',
                 controllerAs: 'model'
             })
@@ -51,6 +52,11 @@
                     asdf: isNotLoggedIn
                 }
             })
+            .when('/recipe/:recipeId', {
+                templateUrl: 'views/recipe/templates/recipeDetails.view.client.html',
+                controller: 'recipeDetailsController',
+                controllerAs: 'model'
+            })
 
 
 
@@ -59,22 +65,15 @@
                 templateUrl: 'views/test/templates/nutritionixTestSearch.view.client.html',
                 controller: 'nutritionixTestSearchController',
                 controllerAs: 'model'
-            }).when('/testFood2Fork', {
-                templateUrl: 'views/test/templates/food2ForkTestSearch.view.client.html',
-                controller: 'food2ForkTestSearchController',
-                controllerAs: 'model'
-            }).when('/testNutritionix/nutritionInfo/:nid', {
+            })
+            .when('/testNutritionix/nutritionInfo/:nid', {
                 templateUrl: 'views/test/templates/nutritionDetails.view.client.html',
                 controller: 'nutritionDetailsController',
-                controllerAs: 'model'
-            }).when('/testFood2Fork/recipe/:rid', {
-                templateUrl: 'views/test/templates/recipeDetails.view.client.html',
-                controller: 'recipeDetailsController',
                 controllerAs: 'model'
             })
             .otherwise({
                 templateUrl: 'views/error/templates/pageNotFound.view.client.html'
-            })
+            });
 
     }
 

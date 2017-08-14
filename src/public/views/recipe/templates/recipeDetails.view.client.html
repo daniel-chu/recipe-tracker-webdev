@@ -1,0 +1,30 @@
+<div class="col-sm-2"></div>
+<div class="col-sm-8 content-panel">
+    <div class="container-fluid recipe-details-panel">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <h2 class="hidden-sm hidden-xs" ng-bind-html="model.recipe.title"></h2>
+                <h3 class="visible-sm visible-xs" ng-bind-html="model.recipe.title"></h3>
+                <h5 ng-bind-html="'Created by ' + model.recipe.publisher"></h5>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 recipe-picture">
+                <img ng-src={{model.recipe.image_url}} class="recipe-picture" alt="recipe picture" />
+            </div>
+            <div class="col-md-6 ingredients-list">
+                <h3>Ingredients</h3>
+                <ul>
+                    <li ng-repeat="ingredient in model.recipe.ingredients track by $index">
+                        <span ng-bind-html="ingredient"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h3><span><a href={{model.recipe.source_url}} target="_blank">Read instructions HERE</a></span></h3>
+    </div>
+</div>
+<div class="col-sm-2"></div>

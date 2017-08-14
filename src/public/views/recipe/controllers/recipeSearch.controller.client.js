@@ -20,6 +20,9 @@
         }
 
         function renderRecipes(recipes) {
+            if(recipes && recipes.length === 0) {
+                vm.noResultsFound = true;
+            }
             vm.recipes = recipes;
         }
 

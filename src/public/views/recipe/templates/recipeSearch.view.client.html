@@ -4,7 +4,7 @@
         <h2 class="visible-md">Search Results for "{{model.recipeSearchText}}" - page {{model.page}}</h2>
         <h3 class="hidden-md">Search Results for "{{model.recipeSearchText}}" - page {{model.page}}</h3>
 
-        <div ng-show="model.recipes.length > 5" class="recipe-search-button-container">
+        <div class="recipe-search-button-container">
             <a ng-hide="model.page === 1" class="recipe-search-prev-button btn btn-sm btn-primary"
             role="button" href="#!/search/recipe/{{model.recipeSearchText}}?page={{model.page-1}}">Previous Page</a>
 
@@ -21,6 +21,21 @@
         </div>
 
         <div class="search-results-container">
+            <div ng-show="model.noResultsFound">
+                <h4>No results found.</h4>
+            </div>
+            <div ng-hide="model.recipes" class="loading-spinner">
+                <div id="circularG">
+                    <div id="circularG_1" class="circularG"></div>
+                    <div id="circularG_2" class="circularG"></div>
+                    <div id="circularG_3" class="circularG"></div>
+                    <div id="circularG_4" class="circularG"></div>
+                    <div id="circularG_5" class="circularG"></div>
+                    <div id="circularG_6" class="circularG"></div>
+                    <div id="circularG_7" class="circularG"></div>
+                    <div id="circularG_8" class="circularG"></div>
+                </div>
+            </div>
             <div class="row recipe-search-result" ng-show="model.recipes" ng-repeat="recipe in model.recipes">
                 <div class="visible-xs">
                     <div class="row">
@@ -37,14 +52,14 @@
                         <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="thumbnail-image" />
                     </div>
                     <div class="col-md-6 col-xs-9">
-                        <a href="#!/testFood2Fork/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
+                        <a href="#!/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
                         <p>by {{recipe.publisher}}</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="recipe-search-button-container">
+        <div ng-show="model.recipes.length > 5" class="recipe-search-button-container">
             <a ng-hide="model.page === 1" class="recipe-search-prev-button btn btn-sm btn-primary"
             role="button" href="#!/search/recipe/{{model.recipeSearchText}}?page={{model.page-1}}">Previous Page</a>
 
