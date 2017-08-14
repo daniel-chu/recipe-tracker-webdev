@@ -8,7 +8,6 @@
             });
 
             $rootScope.displayFadeWarning = function(message) {
-                console.log(message)
                 var $warningMessage = $('#fading-warning-message');
                 $warningMessage.hide().stop({ clearQueue: true });
 
@@ -45,7 +44,7 @@
                 controller: 'loginController',
                 controllerAs: 'model',
                 resolve: {
-                    asdf: isNotLoggedIn
+                    check: isNotLoggedIn
                 }
             })
             .when('/register', {
@@ -53,7 +52,23 @@
                 controller: 'registerController',
                 controllerAs: 'model',
                 resolve: {
-                    asdf: isNotLoggedIn
+                    check: isNotLoggedIn
+                }
+            })
+            .when('/profile/:username', {
+                templateUrl: 'views/user/templates/profile.view.client.html',
+                controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedInUser: getLoggedInUser
+                }
+            })
+            .when('/settings', {
+                templateUrl: 'views/user/templates/settings.view.client.html',
+                controller: 'settingsController',
+                controllerAs: 'model',
+                resolve: {
+                    check: isLoggedIn
                 }
             })
             .when('/recipe/:recipeId', {
@@ -87,9 +102,30 @@
                 if (user) {
                     $location.url('');
                     $rootScope.displayFadeWarning('You are already logged in.')
-                    return true;
+                    return false;
                 }
-            })
+                return true;
+            });
+    }
+
+    function isLoggedIn($rootScope, $location, userService) {
+        return userService.getLoggedInUser()
+            .then(function(user) {
+                if (!user) {
+                    $rootScope.previousUrl = $location.url();
+                    $location.url('/login');
+                    $rootScope.displayFadeWarning('Please log in first.')
+                    return null;
+                }
+                return user;
+            });
+    }
+
+    function getLoggedInUser(userService) {
+        return userService.getLoggedInUser()
+            .then(function(user) {
+                return user;
+            });
     }
 
 })();

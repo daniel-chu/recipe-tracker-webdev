@@ -7,10 +7,13 @@
         var vm = this;
         vm.recipeSearchText = $routeParams['recipeSearchText'];
         vm.page = parseInt($location.search()['page']) || 1;
-
         $rootScope.recipeSearchText = vm.recipeSearchText;
 
         vm.searchRecipe = searchRecipe;
+
+        function init() {
+            searchRecipe(vm.recipeSearchText, vm.page);
+        }
 
         function searchRecipe(recipeSearchText, page) {
             recipeService.searchRecipe(recipeSearchText, page)
@@ -20,16 +23,12 @@
         }
 
         function renderRecipes(recipes) {
-            if(recipes && recipes.length === 0) {
+            if (recipes && recipes.length === 0) {
                 vm.noResultsFound = true;
             }
             vm.recipes = recipes;
         }
-
-        function init() {
-            searchRecipe(vm.recipeSearchText, vm.page);
-        }
-
+        
         init();
     }
 

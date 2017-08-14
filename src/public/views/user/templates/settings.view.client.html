@@ -1,0 +1,77 @@
+<div class="col-sm-3"></div>
+<div class="col-sm-6 content-panel">
+    <div class="container-fluid">
+        <h2>Settings</h2>
+        <div class="row">
+            <h3 class="hidden-xs">Change your password</h3>
+            <h4 class="visible-xs">Change your password</h4>
+
+            <div ng-show="model.pwError" class="alert alert-danger">{{model.pwError}}</div>
+            <div ng-show="model.pwAlert" class="alert alert-info">{{model.pwAlert}}</div>
+
+            <input id="oldPassword"
+                   ng-model="model.oldPassword"
+                   name="oldPassword"
+                   type="password"
+                   class="form-control"
+                   placeholder="old password"
+                   dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+
+            <input id="newPassword"
+                   ng-model="model.newPassword"
+                   name="newPassword"
+                   type="password"
+                   class="form-control"
+                   placeholder="new password"
+                   dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+
+            <input id="newPasswordConfirm"
+                   ng-model="model.newPasswordConfirm"
+                   name="newPasswordConfirm"
+                   type="password"
+                   class="form-control"
+                   placeholder="confirm new password"
+                   dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+
+            <div class="row">
+                <a class="btn btn-block btn-primary"
+                   role="button"
+                   ng-click="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)">
+                   change password
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <h3 class="hidden-xs">Change your email</h3>
+            <h4 class="visible-xs">Change your email</h4>
+
+            <div ng-show="model.emError" class="alert alert-danger">{{model.emError}}</div>
+            <div ng-show="model.emAlert" class="alert alert-info">{{model.emAlert}}</div>
+
+            <input id="password"
+                   ng-model="model.password"
+                   name="password"
+                   type="password"
+                   class="form-control"
+                   placeholder="password"
+                   dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
+
+            <input id="newEmail"
+                   ng-model="model.newEmail"
+                   name="newEmail"
+                   class="form-control"
+                   placeholder="new email"
+                   dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
+
+            <div class="row">
+                <a class="btn btn-block btn-primary"
+                   role="button"
+                   ng-click="model.updateEmail(model.password, model.newEmail)">
+                   change email
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-3"></div>

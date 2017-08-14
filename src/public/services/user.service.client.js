@@ -67,7 +67,7 @@
         function findUserByUsername(username) {
             for (var i = 0; i < users.length; i++) {
                 if (username === users[i].username) {
-                    return Promise.resolve(users[i]);
+                    return Promise.resolve(angular.copy(users[i]));
                 }
             }
             return Promise.resolve(null);
@@ -90,7 +90,7 @@
 
         //TODO temporarily here for the prototype
         function setLoggedInUser(userInfo) {
-            curUser = userInfo;
+            curUser = angular.copy(userInfo);
             return Promise.resolve(curUser);
         }
 
