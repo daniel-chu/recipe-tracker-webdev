@@ -27,12 +27,18 @@
             }
 
             function redirectToLogin() {
-                $rootScope.previousUrl = $location.url();
+                var route = $location.url();
+                if (route !== '/login' && route !== '/register') {
+                    $rootScope.previousUrl = $location.url();
+                }
                 $location.url('/login');
             }
 
             function redirectToRegister() {
-                $rootScope.previousUrl = $location.url();
+                var route = $location.url();
+                if (route !== '/login' && route !== '/register') {
+                    $rootScope.previousUrl = $location.url();
+                }
                 $location.url('/register');
             }
 
