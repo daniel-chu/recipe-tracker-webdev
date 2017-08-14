@@ -1,5 +1,5 @@
 {
-  "name": "recipe-tracker",
+  "name": "RecipEat",
   "version": "1.0.0",
   "description": "Web App to track recipes and nutrition.",
   "main": "server.js",
