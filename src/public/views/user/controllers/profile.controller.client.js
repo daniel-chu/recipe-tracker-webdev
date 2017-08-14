@@ -16,7 +16,6 @@
                     .then(function(user) {
                         if (!user) {
                             vm.doesNotExist = true;
-                            return;
                         }
                         vm.user = user;
                         vm.myProfile = false;
