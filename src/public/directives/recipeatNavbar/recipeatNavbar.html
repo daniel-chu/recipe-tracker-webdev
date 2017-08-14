@@ -24,6 +24,15 @@
                 <li ng-hide="loggedIn" ng-click="redirectToRegister()">
                     <a class="nav-bar-page-tab">Register</a>
                 </li>
+                <li ng-show="loggedIn" class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#!/settings" class="nav-bar-page-tab">settings</a></li>
+                        <li><a ng-click="logout()" class="nav-bar-page-tab">logout</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <form class="navbar-form" id="navbar-search-form">

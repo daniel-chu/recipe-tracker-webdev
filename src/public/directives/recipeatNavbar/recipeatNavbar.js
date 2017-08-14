@@ -8,6 +8,7 @@
             $scope.searchRecipe = searchRecipe;
             $scope.redirectToLogin = redirectToLogin;
             $scope.redirectToRegister = redirectToRegister;
+            $scope.logout = logout;
 
             $scope.$watch('loggedIn', function() {
                 if ($rootScope.loggedIn) {
@@ -35,7 +36,16 @@
                 $location.url('/register');
             }
 
+            function logout() {
+                userService.logout().then(function() {
+                    $rootScope.loggedIn = false;
 
+                    $rootScope.collapseNavbar();
+                    $location.url('/');
+
+                    $rootScope.$apply();
+                });
+            }
         }
 
         return {

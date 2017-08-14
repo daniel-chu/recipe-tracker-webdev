@@ -5,22 +5,26 @@
     function loginController($rootScope, $location, userService) {
         var vm = this;
         vm.login = login;
+        vm.returnToPreviousPage = returnToPreviousPage;
 
         function login(userInfo) {
             if (userInfo) {
-                console.log('LOGGING IN WITH USERNAME: ' + userInfo.username + '\nPASSWORD: ' + userInfo.password);
-
-                userService.setLoggedInUser(userInfo)
+                userService.login(userInfo.username, userInfo.password)
                     .then(function(user) {
                         if (user) {
                             $rootScope.loggedIn = true;
-                            var returnUrl = $rootScope.previousUrl || "";
-                            $location.url(returnUrl);
-
-                            $rootScope.$apply();
+                            returnToPreviousPage();
+                        } else {
+                            vm.error = 'Invalid username/password.';
                         }
+                        $rootScope.$apply();
                     });
             }
+        }
+
+        function returnToPreviousPage() {
+            var returnUrl = $rootScope.previousUrl || "";
+            $location.url(returnUrl);
         }
 
     }

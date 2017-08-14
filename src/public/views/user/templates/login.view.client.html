@@ -2,6 +2,8 @@
 <div class="col-sm-6 content-panel">
     <div class="container-fluid">
         <h1>Login</h1>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+
         <div class="row">
             <input id="username"
                    ng-model="model.userInfo.username"
@@ -32,6 +34,13 @@
                href="#!/register"
                role="button">Register</a>
         </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-default"
+               ng-click="model.returnToPreviousPage()"
+               role="button">Cancel</a>
+        </div>
+
     </div>
 </div>
 <div class="col-sm-3"></div>

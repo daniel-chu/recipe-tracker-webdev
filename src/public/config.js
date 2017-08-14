@@ -18,10 +18,14 @@
                 })
             }
 
-            $rootScope.$on('$routeChangeStart', function(event, next, current) {
+            $rootScope.collapseNavbar = function() {
                 if ($('#collapsible-navigationbar').hasClass('collapse in')) {
                     $('.navbar-toggle').click();
                 };
+            }
+
+            $rootScope.$on('$routeChangeStart', function(event, next, current) {
+                $rootScope.collapseNavbar();
                 $window.scrollTo(0, 0);
             });
         });

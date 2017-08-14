@@ -1,0 +1,84 @@
+<div class="col-sm-3"></div>
+<div class="col-sm-6 content-panel">
+    <div class="container-fluid">
+        <h1>Register</h1>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+        
+        <div class="row">
+            <input id="username"
+                   ng-model="model.userInfo.username"
+                   name="username"
+                   class="form-control"
+                   placeholder="username"
+                   dc-on-enter="model.login(model.userInfo)"/>
+        </div>
+
+        <div class="row">
+            <input id="email"
+                   ng-model="model.userInfo.email"
+                   type="email"
+                   name="email"
+                   class="form-control"
+                   placeholder="email"
+                   dc-on-enter="model.login(model.userInfo)"/>
+        </div>
+
+        <div class="row">
+            <input id="firstName"
+                   ng-model="model.userInfo.firstName"
+                   name="firstName"
+                   class="form-control"
+                   placeholder="first name"
+                   dc-on-enter="model.login(model.userInfo)"/>
+        </div>
+
+        <div class="row">
+            <input id="lastName"
+                   ng-model="model.userInfo.lastName"
+                   name="lastName"
+                   class="form-control"
+                   placeholder="last name"
+                   dc-on-enter="model.login(model.userInfo)"/>
+        </div>
+
+        <div class="row">
+            <input id="password"
+                   ng-model="model.userInfo.password"
+                   name="password"
+                   type="password"
+                   class="form-control"
+                   placeholder="password"
+                   dc-on-enter="model.login(model.userInfo)"/>
+        </div>
+
+        <div class="row">
+            <input id="verifyPassword"
+                   ng-model="model.userInfo.verifyPassword"
+                   name="verifyPassword"
+                   type="password"
+                   class="form-control"
+                   placeholder="verify password"
+                   dc-on-enter="model.login(model.userInfo)"/>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-info"
+               role="button"
+               ng-click="model.register(model.userInfo)">Register</a>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-primary"
+               role="button"
+               href="#!/login"
+               ng-click="model.register(model.userInfo)">I have an account already.</a>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-default"
+               ng-click="model.returnToPreviousPage()"
+               role="button">Cancel</a>
+        </div>
+    </div>
+</div>
+<div class="col-sm-3"></div>
