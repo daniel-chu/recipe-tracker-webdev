@@ -5,6 +5,7 @@
     transition: max-height 1s;
     padding: 0px 10px 10px;
     margin: 0px 15px 15px;
+    min-height: 100px;
 }
 
 .container-fluid>.row {
@@ -77,13 +78,7 @@
     padding: 15px;
 }
 
-
-
-
-
-
 /* start 'enter' transition on main view */
-
 #recipeat-content-container.ng-enter {
     /* transition on enter for .5s */
     transition: .6s;
@@ -93,14 +88,7 @@
 }
 
 
-
-
-
-
-
-
 /* end 'enter' transition on main view */
-
 #recipeat-content-container.ng-enter-active {
     /* end with opacity 1 (fade in) */
     opacity: 1;
@@ -147,6 +135,10 @@
 
 .search-results-container {
     padding-bottom: 10px;
+}
+
+.fade-in.ng-hide-remove {
+    animation: 0.5s fadeIn ease;
 }
 
 .search-result-publisher-text {
