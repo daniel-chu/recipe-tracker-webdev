@@ -39,7 +39,7 @@
 }
 
 #main-panel {
-    background-image: url("../assets/images/homepage_background.jpg"), linear-gradient(to bottom, black 20%, white 100%);
+    background-image: url("../assets/images/homepageBackground.jpg"), linear-gradient(to bottom, black 20%, white 100%);
     background-blend-mode: lighten;
     background-position: center center;
     background-size: cover;
