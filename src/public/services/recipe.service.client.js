@@ -4,12 +4,24 @@
 
     function recipeService($http) {
 
-        var cachedRecipes = [];
+        var cachedRecipes = {
+            '35120': {
+                recipe_id: '35120',
+                title: 'Bacon Wrapped Jalopeno Popper Stuffed Chicken',
+                image_url: 'http://static.food2fork.com/Bacon2BWrapped2BJalapeno2BPopper2BStuffed2BChicken2B5002B5909939b0e65.jpg'
+            },
+            '2803': {
+                recipe_id: '2803',
+                title: 'Banana Crumb Muffins',
+                image_url: 'http://static.food2fork.com/124030cedd.jpg'
+            }
+        };
 
         var api = {
             searchRecipe: searchRecipe,
             getRecipeDetails: getRecipeDetails,
-            cacheRecipe: cacheRecipe
+            cacheRecipe: cacheRecipe,
+            getCachedRecipeInfo: getCachedRecipeInfo
         }
 
         return api;
@@ -38,13 +50,26 @@
         }
 
         function cacheRecipe(recipe) {
-            var cachedInfo = {
-                recipe_id : recipe.recipe_id,
+            cachedRecipes[recipe.recipe_id] = {
+                recipe_id: recipe.recipe_id,
+                title: recipe.title,
                 image_url: recipe.image_url
             }
 
-            cachedRecipes.push(cachedInfo);
-            return Promise.resolve(cachedInfo);
+            return Promise.resolve(cachedRecipes[recipe.recipe_id]);
+        }
+
+        function getCachedRecipeInfo(recipeIds) {
+            var recipeInfo = [];
+
+            for (var i = 0; i < recipeIds.length; i++) {
+                var recipe = cachedRecipes[recipeIds[i]];
+                if(recipe) {
+                    recipeInfo.push(recipe);
+                }
+            }
+
+            return Promise.resolve(recipeInfo);
         }
     }
 

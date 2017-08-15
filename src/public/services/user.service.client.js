@@ -13,15 +13,15 @@
                 _id: '1',
                 username: 'alice',
                 password: 'alice',
-                likedRecipes: [],
-                sharedRecipes: []
+                sharedRecipes: ['35120'],
+                likedRecipes: ['2803']
             },
             {
                 _id: '2',
                 username: 'bob',
                 password: 'bob',
-                likedRecipes: [],
-                sharedRecipes: []
+                sharedRecipes: [],
+                likedRecipes: []
             }
         ]
 
@@ -35,10 +35,14 @@
             createUser: createUser,
             updateUser: updateUser,
             findUserByUsername: findUserByUsername,
+            getLoggedInUser: getLoggedInUser,
+
             createFollowFromUserToUser: createFollowFromUserToUser,
             likeRecipeForUser: likeRecipeForUser,
             shareRecipeForUser: shareRecipeForUser,
-            getLoggedInUser: getLoggedInUser
+
+            getUsersFollowing: getUsersFollowing,
+            getFollowers: getFollowers
         }
 
         return api;
@@ -86,6 +90,10 @@
             return Promise.resolve(null);
         }
 
+        function getLoggedInUser() {
+            return Promise.resolve(curUser);
+        }
+
         function createFollowFromUserToUser(userId, followedUserId) {
             var relationship = {
                 _id: (followIdCounter++).toString(),
@@ -119,8 +127,38 @@
             }
         }
 
-        function getLoggedInUser() {
-            return Promise.resolve(curUser);
+        function getUsersFollowing(userId) {
+            var usersFollowing = [];
+
+            for (var i = 0; i < userFollows.length; i++) {
+                if (userId === userFollows[i].userId) {
+                    usersFollowing.push(getUserByUserId(userFollows[i].followedUserId));
+                }
+            }
+
+            return Promise.resolve(usersFollowing);
+        }
+
+        function getFollowers(userId) {
+            var followers = [];
+
+            for (var i = 0; i < userFollows.length; i++) {
+                if (userId === userFollows[i].followedUserId) {
+                    followers.push(getUserByUserId(userFollows[i].userId));
+                }
+            }
+
+            return Promise.resolve(followers);
+        }
+
+        // temporary helper while this stuff is on client side for prototype
+        function getUserByUserId(userId) {
+            for (var i = 0; i < users.length; i++) {
+                if (userId === users[i]._id) {
+                    return users[i];
+                }
+            }
+            return null;
         }
 
         //TODO temporarily here for the prototype

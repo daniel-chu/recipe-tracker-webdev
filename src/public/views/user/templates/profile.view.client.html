@@ -15,21 +15,29 @@
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="active"><a data-target="#shared" data-toggle="tab">Shared Recipes</a></li>
                         <li class=""><a data-target="#liked" data-toggle="tab">Liked Recipes</a></li>
-                        <li class=""><a data-target="#followed" data-toggle="tab">Followed</a></li>
+                        <li class=""><a data-target="#followers" data-toggle="tab">Followers</a></li>
                         <li class=""><a data-target="#following" data-toggle="tab">Following</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="shared">
-                            RECIPES SHARED
+                            <div ng-repeat="recipe in model.sharedRecipes">
+                                {{recipe.title}}
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="liked">
-                            RECIPES LIKED
+                            <div ng-repeat="recipe in model.likedRecipes">
+                                {{recipe.title}}
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="followed">
-                            USERS FOLLOWED
+                        <div class="tab-pane fade" id="followers">
+                            <div ng-repeat="user in model.followers">
+                                {{user.username}}
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="following">
-                            USERS FOLLOWING
+                            <div ng-repeat="user in model.usersFollowing">
+                                {{user.username}}
+                            </div>
                         </div>
                     </div>
                 </div>
