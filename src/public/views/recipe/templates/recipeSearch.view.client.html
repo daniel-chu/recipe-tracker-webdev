@@ -39,7 +39,7 @@
             <div class="row recipe-search-result fade-in" ng-show="model.recipes" ng-repeat="recipe in model.recipes">
                 <div class="visible-xs">
                     <div class="row">
-                        <a href="#!/testFood2Fork/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
+                        <a href="#!/recipe/{{recipe.recipe_id}}"><h4 ng-bind-html="recipe.title"></h4></a>
                     </div>
                     <div class="row">
                         <img ng-src={{recipe.image_url}} alt="recipe thumbnail" class="thumbnail-image float-left" />
