@@ -70,6 +70,11 @@
     text-shadow: #000 0px 0px 4px;
 }
 
+.like-share-button-row button {
+    margin: 0px 10px;
+    padding: 4px 10px;
+}
+
 .navbar-default {
     background: #e95420;
 }
@@ -93,7 +98,11 @@
     padding: 15px;
 }
 
+
+
+
 /* start 'enter' transition on main view */
+
 #recipeat-content-container.ng-enter {
     /* transition on enter for .5s */
     transition: .6s;
@@ -103,7 +112,11 @@
 }
 
 
+
+
+
 /* end 'enter' transition on main view */
+
 #recipeat-content-container.ng-enter-active {
     /* end with opacity 1 (fade in) */
     opacity: 1;
@@ -122,6 +135,10 @@
     display: inline-block;
     max-width: 90%;
     max-height: 80vh;
+}
+
+.recipe-publisher-heading {
+    margin: 5px;
 }
 
 .recipe-search-button-container {
@@ -175,6 +192,15 @@
     border: 1px solid darkgray;
     max-width: 100%;
     max-height: 100%;
+}
+
+.user-action-button-panel {
+    margin: 10px;
+    display: inline-block;
+}
+
+.user-info-panel {
+    text-align: center;
 }
 
 @media screen and (max-width: 480px) {

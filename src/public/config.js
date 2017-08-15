@@ -74,7 +74,10 @@
             .when('/recipe/:recipeId', {
                 templateUrl: 'views/recipe/templates/recipeDetails.view.client.html',
                 controller: 'recipeDetailsController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    loggedInUser: getLoggedInUser
+                }
             })
 
 

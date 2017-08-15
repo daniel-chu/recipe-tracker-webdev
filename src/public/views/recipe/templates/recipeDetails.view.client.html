@@ -2,15 +2,18 @@
 <div class="col-sm-8 content-panel">
     <div ng-show="model.recipe" class="container-fluid recipe-details-panel fade-in">
         <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-8">
+            <div class="col-sm-12">
                 <h2 class="hidden-sm hidden-xs" ng-bind-html="model.recipe.title"></h2>
                 <h3 class="visible-sm visible-xs" ng-bind-html="model.recipe.title"></h3>
-                <h5 ng-bind-html="'Created by ' + model.recipe.publisher"></h5>
+                <div class="row">
+                    <h5 class="recipe-publisher-heading" ng-bind-html="'Created by ' + model.recipe.publisher"></h5>
+                </div>
+                <div ng-show="loggedIn" class="row like-share-button-row">
+                    <button class="btn btn-primary" ng-click="model.likeRecipe(model.recipe)">LIKE</button>
+                    <button class="btn btn-warning" ng-click="model.shareRecipe(model.recipe)">SHARE</button>
+                </div>
             </div>
-            <div class="col-sm-2"></div>
         </div>
-
         <div class="row">
             <div class="col-md-6 recipe-picture">
                 <img ng-src={{model.recipe.image_url}} class="recipe-picture" alt="recipe picture" />

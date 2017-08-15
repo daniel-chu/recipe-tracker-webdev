@@ -6,6 +6,7 @@
         var vm = this;
         vm.loggedInUser = loggedInUser;
         vm.profileUsername = $routeParams['username'];
+        vm.followThisUser = followThisUser;
 
         function init() {
             retrieveUserForThisProfile().then(function(user) {
@@ -20,7 +21,6 @@
                 });
 
                 recipeService.getCachedRecipeInfo(user.sharedRecipes).then(function(sharedRecipes) {
-                    console.log(sharedRecipes)
                     vm.sharedRecipes = sharedRecipes;
                     $scope.$apply();
                 });
@@ -49,6 +49,10 @@
                         return Promise.resolve(vm.user);
                     });
             }
+        }
+
+        function followThisUser(user) {
+            userService.createFollowFromUserToUser(vm.loggedInUser._id, user._id);
         }
 
         init();

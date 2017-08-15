@@ -6,9 +6,15 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="user-info-panel">
                         <h1>{{model.user.username}}'s Profile</h1>
-                        <div ng-show="model.myProfile">THIS IS MY PROFILE (this is here for debugging)</div>
-                        <div ng-hide="model.myProfile">THIS IS NOT MY PROFILE (this is here for debugging)</div>
                         <img class="profile-picture" src="http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png">
+                        <div ng-show="loggedIn" class="user-action-button-panel">
+                            <div ng-show="model.myProfile">
+                                <button class="btn btn-info">EDIT</button>
+                            </div>
+                            <div ng-hide="model.myProfile">
+                                <button class="btn btn-primary" ng-click="model.followThisUser(model.user)">FOLLOW</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-12 user-content-panel">

@@ -7,7 +7,7 @@
         var cachedRecipes = {
             '35120': {
                 recipe_id: '35120',
-                title: 'Bacon Wrapped Jalopeno Popper Stuffed Chicken',
+                title: 'Bacon Wrapped Jalapeno Popper Stuffed Chicken',
                 image_url: 'http://static.food2fork.com/Bacon2BWrapped2BJalapeno2BPopper2BStuffed2BChicken2B5002B5909939b0e65.jpg'
             },
             '2803': {
@@ -44,7 +44,6 @@
                 method: 'GET',
                 url: '/api/food2fork/' + recipeId
             }).then(function(response) {
-                console.log(response);
                 return response.data;
             });
         }

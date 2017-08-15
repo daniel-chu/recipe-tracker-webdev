@@ -7,7 +7,7 @@
         var userIdCounter = 3;
         var followIdCounter = 1;
 
-        var curUser;
+        var curUserId;
 
         var users = [{
                 _id: '1',
@@ -91,7 +91,7 @@
         }
 
         function getLoggedInUser() {
-            return Promise.resolve(curUser);
+            return Promise.resolve(getUserByUserId(curUserId));
         }
 
         function createFollowFromUserToUser(userId, followedUserId) {
@@ -163,8 +163,8 @@
 
         //TODO temporarily here for the prototype
         function setLoggedInUser(userInfo) {
-            curUser = angular.copy(userInfo);
-            return Promise.resolve(curUser);
+            curUserId = userInfo ? userInfo._id : null;
+            return Promise.resolve(getUserByUserId(curUserId));
         }
 
     }
