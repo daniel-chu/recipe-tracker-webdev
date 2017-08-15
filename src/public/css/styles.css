@@ -1,3 +1,7 @@
+.centered-tabs {
+    text-align: center;
+}
+
 .content-panel {
     background-color: rgba(255, 255, 255, 0.92);
     border-radius: 5px;
@@ -10,6 +14,33 @@
 
 .container-fluid>.row {
     margin: 7px 5px;
+}
+
+.dropdown-tab-label {
+    float: none;
+    display: inline-block;
+    width: 50%;
+}
+
+.dropdown-menu.open-overflow-right {
+    left: 0;
+    right: auto;
+}
+
+.dropdown-menu.open-overflow-left {
+    left: auto;
+    right: 0;
+}
+
+.dropdown-tab-selection {
+    width: 100%;
+    text-align: center;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+.fade-in.ng-hide-remove {
+    animation: 0.5s fadeIn ease;
 }
 
 .fading-popup-message {
@@ -37,17 +68,6 @@
 
 .ingredients-list ul {
     padding-left: 20px;
-}
-
-#main-panel {
-    background-image: url("../assets/images/homepageBackground.jpg"), linear-gradient(to bottom, black 20%, white 100%);
-    background-blend-mode: lighten;
-    background-position: center center;
-    background-size: cover;
-    width: 100%;
-    height: 500px;
-    opacity: 1;
-    margin-top: 50px;
 }
 
 #landing-page {
@@ -79,28 +99,41 @@
     margin-top: 15px;
 }
 
+#main-panel {
+    background-image: url("../assets/images/homepageBackground.jpg"), linear-gradient(to bottom, black 20%, white 100%);
+    background-blend-mode: lighten;
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 500px;
+    opacity: 1;
+    margin-top: 50px;
+}
+
+.navbar-brand,
+.nav-bar-page-tab {
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
 .navbar-default {
     background: #e95420;
 }
 
-.user-content-panel .row {
-    margin: 0 10px;
+.nav-tabs>li>a {
+    margin-right: 0;
 }
 
-.user-content-panel {
-    margin-top: 25px;
+.profile-tab {
+    padding: 8px 12px !important;
+    font-size: 0.9em;
 }
 
-.tab-content {
-    background-color: white;
-    border-width: 0 1px 1px 1px;
-    border-color: #dddddd;
-    border-style: solid;
-}
 
 #recipeat-content-container {
     padding: 15px;
 }
+
+
 
 
 
@@ -114,6 +147,8 @@
     /* start with opacity 0 (invisible) */
     opacity: 0;
 }
+
+
 
 
 
@@ -173,18 +208,17 @@
     padding-bottom: 10px;
 }
 
-.fade-in.ng-hide-remove {
-    animation: 0.5s fadeIn ease;
-}
-
 .search-result-publisher-text {
     float: left;
     margin-left: 15px;
 }
 
-.navbar-brand,
-.nav-bar-page-tab {
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4) !important;
+.tab-content {
+    background-color: white;
+    border-width: 0 1px 1px 1px;
+    border-color: #dddddd;
+    border-style: solid;
+    min-height: 100px;
 }
 
 .thumbnail-col {
@@ -201,6 +235,14 @@
 .user-action-button-panel {
     margin: 10px;
     display: block;
+}
+
+.user-content-panel .row {
+    margin: 0 10px;
+}
+
+.user-content-panel {
+    margin-top: 25px;
 }
 
 .user-info-panel {
