@@ -75,6 +75,10 @@
     padding: 4px 10px;
 }
 
+.loading-spinner {
+    margin-top: 15px;
+}
+
 .navbar-default {
     background: #e95420;
 }
