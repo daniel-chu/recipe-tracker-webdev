@@ -9,6 +9,7 @@
             $scope.redirectToLogin = redirectToLogin;
             $scope.redirectToRegister = redirectToRegister;
             $scope.logout = logout;
+            $scope.user;
 
             $scope.$watch('loggedIn', function() {
                 if ($rootScope.loggedIn) {
@@ -16,6 +17,8 @@
                         if (user) {
                             $('#nav-bar-user-name').text(user.username);
                         }
+                        $scope.user = user;
+                        $scope.$apply();
                     });
                 }
             });

@@ -9,29 +9,35 @@
             <div ng-show="model.pwError" class="alert alert-danger">{{model.pwError}}</div>
             <div ng-show="model.pwAlert" class="alert alert-info">{{model.pwAlert}}</div>
 
-            <input id="oldPassword"
-                   ng-model="model.oldPassword"
-                   name="oldPassword"
-                   type="password"
-                   class="form-control"
-                   placeholder="old password"
-                   dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+            <div class="row">
+                <input id="oldPassword"
+                       ng-model="model.oldPassword"
+                       name="oldPassword"
+                       type="password"
+                       class="form-control"
+                       placeholder="old password"
+                       dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+            </div>
 
-            <input id="newPassword"
-                   ng-model="model.newPassword"
-                   name="newPassword"
-                   type="password"
-                   class="form-control"
-                   placeholder="new password"
-                   dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+            <div class="row">
+                <input id="newPassword"
+                       ng-model="model.newPassword"
+                       name="newPassword"
+                       type="password"
+                       class="form-control"
+                       placeholder="new password"
+                       dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+            </div>
 
-            <input id="newPasswordConfirm"
-                   ng-model="model.newPasswordConfirm"
-                   name="newPasswordConfirm"
-                   type="password"
-                   class="form-control"
-                   placeholder="confirm new password"
-                   dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+            <div class="row">
+                <input id="newPasswordConfirm"
+                       ng-model="model.newPasswordConfirm"
+                       name="newPasswordConfirm"
+                       type="password"
+                       class="form-control"
+                       placeholder="confirm new password"
+                       dc-on-enter="model.updatePassword(model.oldPassword, model.newPassword, model.newPasswordConfirm)"/>
+            </div>
 
             <div class="row">
                 <a class="btn btn-block btn-primary"
@@ -49,21 +55,25 @@
             <div ng-show="model.emError" class="alert alert-danger">{{model.emError}}</div>
             <div ng-show="model.emAlert" class="alert alert-info">{{model.emAlert}}</div>
 
-            <input id="password"
-                   ng-model="model.password"
-                   name="password"
-                   type="password"
-                   class="form-control"
-                   placeholder="password"
-                   dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
+            <div class="row">
+                <input id="password"
+                       ng-model="model.password"
+                       name="password"
+                       type="password"
+                       class="form-control"
+                       placeholder="password"
+                       dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
+            </div>
 
-            <input id="newEmail"
-                   ng-model="model.newEmail"
-                   name="newEmail"
-                   class="form-control"
-                   placeholder="new email"
-                   dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
-
+            <div class="row">
+                <input id="newEmail"
+                       ng-model="model.newEmail"
+                       name="newEmail"
+                       class="form-control"
+                       placeholder="new email"
+                       dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
+            </div>
+            
             <div class="row">
                 <a class="btn btn-block btn-primary"
                    role="button"

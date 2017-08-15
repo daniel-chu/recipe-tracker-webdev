@@ -4,9 +4,12 @@
 
     function recipeService($http) {
 
+        var cachedRecipes = [];
+
         var api = {
             searchRecipe: searchRecipe,
-            getRecipeDetails: getRecipeDetails
+            getRecipeDetails: getRecipeDetails,
+            cacheRecipe: cacheRecipe
         }
 
         return api;
@@ -32,6 +35,16 @@
                 console.log(response);
                 return response.data;
             });
+        }
+
+        function cacheRecipe(recipe) {
+            var cachedInfo = {
+                recipe_id : recipe.recipe_id,
+                image_url: recipe.image_url
+            }
+
+            cachedRecipes.push(cachedInfo);
+            return Promise.resolve(cachedInfo);
         }
     }
 

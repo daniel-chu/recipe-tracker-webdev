@@ -2,16 +2,27 @@
     angular.module('RecipEat')
         .service('userService', userService);
 
-    function userService($rootScope, $location, $http) {
+    function userService($rootScope, $location, $http, recipeService) {
         // temp counter for prototype
         var userIdCounter = 3;
         var followIdCounter = 1;
 
         var curUser;
 
-        var users = [
-            { _id: '1', username: 'alice', password: 'alice' },
-            { _id: '2', username: 'bob', password: 'bob' }
+        var users = [{
+                _id: '1',
+                username: 'alice',
+                password: 'alice',
+                likedRecipes: [],
+                sharedRecipes: []
+            },
+            {
+                _id: '2',
+                username: 'bob',
+                password: 'bob',
+                likedRecipes: [],
+                sharedRecipes: []
+            }
         ]
 
         var userFollows = [
@@ -25,6 +36,8 @@
             updateUser: updateUser,
             findUserByUsername: findUserByUsername,
             createFollowFromUserToUser: createFollowFromUserToUser,
+            likeRecipeForUser: likeRecipeForUser,
+            shareRecipeForUser: shareRecipeForUser,
             getLoggedInUser: getLoggedInUser
         }
 
@@ -73,15 +86,37 @@
             return Promise.resolve(null);
         }
 
-        function createFollowFromUserToUser(user1, user2) {
+        function createFollowFromUserToUser(userId, followedUserId) {
             var relationship = {
                 _id: (followIdCounter++).toString(),
-                userId: user1._id,
-                followedUserId: user2._id
+                userId: userId,
+                followedUserId: followedUserId
             }
 
             userFollows.push(relationship);
             return Promise.resolve(relationship);
+        }
+
+        function likeRecipeForUser(recipe, userId) {
+            for (var i = 0; i < users.length; i++) {
+                if (userId === users[i]._id) {
+                    users[i].likedRecipes.push(recipe.recipe_id);
+                    return recipeService.cacheRecipe(recipe).then(function() {
+                        return users[i];
+                    });
+                }
+            }
+        }
+
+        function shareRecipeForUser(recipe, userId) {
+            for (var i = 0; i < users.length; i++) {
+                if (userId === users[i]._id) {
+                    users[i].sharedRecipes.push(recipe.recipe_id);
+                    return recipeService.cacheRecipe(recipe).then(function() {
+                        return users[i];
+                    });
+                }
+            }
         }
 
         function getLoggedInUser() {

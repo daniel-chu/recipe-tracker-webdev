@@ -1,18 +1,43 @@
 <div class="col-sm-2"></div>
 <div class="col-sm-8 content-panel">
     <div class="container-fluid">
-
         <div ng-show="model.user" class="profile-page">
-            <h2>{{model.user.username}}'s Profile</h2>
-
-            <div ng-show="model.myProfile">THIS IS MY PROFILE</div>
-            <div ng-hide="model.myProfile">THIS IS NOT MY PROFILE</div>
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <div class="user-info-panel">
+                        <h1>{{model.user.username}}'s Profile</h1>
+                        <div ng-show="model.myProfile">THIS IS MY PROFILE (this is here for debugging)</div>
+                        <div ng-hide="model.myProfile">THIS IS NOT MY PROFILE (this is here for debugging)</div>
+                        <img class="profile-picture" src="http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png">
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-12 user-content-panel">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a data-target="#shared" data-toggle="tab">Shared Recipes</a></li>
+                        <li class=""><a data-target="#liked" data-toggle="tab">Liked Recipes</a></li>
+                        <li class=""><a data-target="#followed" data-toggle="tab">Followed</a></li>
+                        <li class=""><a data-target="#following" data-toggle="tab">Following</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="shared">
+                            RECIPES SHARED
+                        </div>
+                        <div class="tab-pane fade" id="liked">
+                            RECIPES LIKED
+                        </div>
+                        <div class="tab-pane fade" id="followed">
+                            USERS FOLLOWED
+                        </div>
+                        <div class="tab-pane fade" id="following">
+                            USERS FOLLOWING
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
         <div ng-show="model.doesNotExist">
             <div>THIS PROFILE DOESNT EXIST</div>
         </div>
-        
     </div>
 </div>
 <div class="col-sm-2"></div>
