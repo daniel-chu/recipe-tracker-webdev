@@ -7,6 +7,7 @@
         vm.loggedInUser = loggedInUser;
         vm.profileUsername = $routeParams['username'];
         vm.followThisUser = followThisUser;
+        vm.isAlreadyFollowingUser = isAlreadyFollowingUser;
 
         function init() {
             retrieveUserForThisProfile().then(function(user) {
@@ -53,6 +54,11 @@
 
         function followThisUser(user) {
             userService.createFollowFromUserToUser(vm.loggedInUser._id, user._id);
+        }
+
+        //TODO COME BACK TO THIS AFTER SERVER SIDE IMPLEMENTED
+        function isAlreadyFollowingUser(user) {
+            return true;
         }
 
         init();

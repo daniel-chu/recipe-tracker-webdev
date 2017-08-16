@@ -12,7 +12,11 @@
                                 <button class="btn btn-info">Edit</button>
                             </div>
                             <div ng-hide="model.myProfile">
-                                <button class="btn btn-primary" ng-click="model.followThisUser(model.user)">Follow</button>
+                                <button hover-change
+                                        class="btn btn-primary"
+                                        ng-click="model.followThisUser(model.user)"
+                                        change-if="model.isAlreadyFollowingUser(model.user)"
+                                        change-to="Unfollow">Follow</button>
                             </div>
                         </div>
                     </div>

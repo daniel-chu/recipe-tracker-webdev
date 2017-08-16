@@ -7,6 +7,8 @@
         vm.recipeId = $routeParams['recipeId'];
         vm.likeRecipe = likeRecipe;
         vm.shareRecipe = shareRecipe;
+        vm.didUserLikeAlready = didUserLikeAlready;
+        vm.didUserShareAlready = didUserShareAlready;
 
         function init() {
             recipeService.getRecipeDetails(vm.recipeId).then(function(result) {
@@ -20,6 +22,15 @@
 
         function shareRecipe(recipe) {
             userService.shareRecipeForUser(recipe, loggedInUser._id);
+        }
+
+        //TODO COME BACK TO THIS AFTER SERVER SIDE IMPLEMENTED
+        function didUserLikeAlready() {
+            return true;
+        }
+
+        function didUserShareAlready() {
+            return true;
         }
 
         init();

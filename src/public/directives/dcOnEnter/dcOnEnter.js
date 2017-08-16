@@ -1,4 +1,4 @@
-angular.module('RecipEat')
+angular.module('recipeatDirectives')
     .directive('dcOnEnter', dcOnEnter);
 
 function dcOnEnter() {

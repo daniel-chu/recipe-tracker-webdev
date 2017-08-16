@@ -42,7 +42,9 @@
             shareRecipeForUser: shareRecipeForUser,
 
             getUsersFollowing: getUsersFollowing,
-            getFollowers: getFollowers
+            getFollowers: getFollowers,
+
+            isUserFollowingUser: isUserFollowingUser
         }
 
         return api;
@@ -149,6 +151,17 @@
             }
 
             return Promise.resolve(followers);
+        }
+
+        function isUserFollowingUser(userId1, userId2) {
+            for (var i = 0; i < userFollows.length; i++) {
+                if (userId1 === userFollows[i].userId) {
+                    if (userId2 === userFollows[i].followedUserId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         // temporary helper while this stuff is on client side for prototype
