@@ -50,21 +50,6 @@ function localStrategy(username, password, done) {
             });
 }
 
-function serializeUser(user, done) {
-    done(null, user.id);
-}
-
-function deserializeUser(id, done) {
-    UserModel.findUserById(id)
-        .then(
-            function(user) {
-                done(null, user);
-            },
-            function(err) {
-                done(err, null);
-            });
-}
-
 function authorized(req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -211,4 +196,19 @@ function getSharedRecipesForUser(req, res) {
     UserModel.getSharedRecipesForUser(userId).then(function(recipes) {
         return res.send(recipes);
     });
+}
+
+function serializeUser(user, done) {
+    done(null, user.id);
+}
+
+function deserializeUser(id, done) {
+    UserModel.findUserById(id)
+        .then(
+            function(user) {
+                done(null, user);
+            },
+            function(err) {
+                done(err, null);
+            });
 }

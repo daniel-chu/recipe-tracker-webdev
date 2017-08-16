@@ -123,6 +123,15 @@
     margin-right: 0;
 }
 
+.profile-picture-container {
+    text-align: center;
+}
+
+.profile-picture-container img {
+    height: 200px;
+    width: 200px;
+}
+
 .profile-tab {
     padding: 8px 12px !important;
     font-size: 0.9em;
@@ -133,31 +142,12 @@
     padding: 15px;
 }
 
-
-
-
-
-
-/* start 'enter' transition on main view */
-
 #recipeat-content-container.ng-enter {
-    /* transition on enter for .5s */
     transition: .6s;
-
-    /* start with opacity 0 (invisible) */
     opacity: 0;
 }
 
-
-
-
-
-
-
-/* end 'enter' transition on main view */
-
 #recipeat-content-container.ng-enter-active {
-    /* end with opacity 1 (fade in) */
     opacity: 1;
 }
 

@@ -6,7 +6,9 @@
                 <div class="col-md-4 col-sm-12">
                     <div class="user-info-panel">
                         <h1>{{model.user.username}}'s Profile</h1>
-                        <img class="profile-picture" src="http://duncanlock.net/images/posts/better-figures-images-plugin-for-pelican/dummy-200x200.png">
+                        <div class="profile-picture-container">
+                            <img ng-src="{{model.user.proPicUrl}}">
+                        </div>
                         <div ng-show="loggedIn" class="user-action-button-panel">
                             <div ng-show="model.myProfile">
                                 <button class="btn btn-info">Edit</button>
