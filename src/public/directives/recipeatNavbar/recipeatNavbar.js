@@ -15,7 +15,9 @@
                 if ($rootScope.loggedIn) {
                     userService.getLoggedInUser().then(function(user) {
                         if (user) {
-                            $('#nav-bar-user-name').text(user.username);
+                            if (user.username.length <= 16) {
+                                $('#nav-bar-user-name').text(user.username);
+                            }
                         }
                         $scope.user = user;
                     });
@@ -47,6 +49,7 @@
             function logout() {
                 userService.logout().then(function() {
                     $rootScope.loggedIn = false;
+                    $('#nav-bar-user-name').text('');
 
                     $rootScope.collapseNavbar();
                     $location.url('/');

@@ -239,6 +239,11 @@
     text-align: center;
 }
 
+.wrap-text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
 @media screen and (max-width: 480px) {
     #landing-page {
         text-align: center;
@@ -275,6 +280,11 @@
 }
 
 @media screen and (min-width: 768px) {
+
+    .navbar-form .input-group {
+        width: 70%;
+    }
+
     #navbar-search-form {
         text-align: center;
     }
