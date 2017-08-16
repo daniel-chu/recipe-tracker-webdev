@@ -3,18 +3,20 @@ var app = require('../../express');
 var UserModel = require('../models/user/user.model.server.js');
 var UserFollowModel = require('../models/user/userfollow.model.server.js');
 
-var bcrypt = require('bcryptjs');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
+var bcrypt = require('bcryptjs');
 
-passport.use(new LocalStrategy(localStrategy));
-passport.serializeUser(serializeUser);
-passport.deserializeUser(deserializeUser);
+require('../configPassport')(passport, LocalStrategy, FacebookStrategy, bcrypt, UserModel);
 
 var auth = authorized;
-var login = loginFn;
+var login = loginLocalFn;
+// var loginFb = loginFacebookFn;
 
 app.post('/api/login', login);
+// app.get('/auth/facebook', loginFb);
+
 app.post('/api/logout', logout);
 app.get('/api/getLoggedInUser', getLoggedInUser);
 app.post('/api/validatepw', validatePassword);
@@ -34,21 +36,12 @@ app.get('/api/user/checkFollow/:followingUserId/:followedUserId', isUserFollowin
 app.get('/api/user/:userId/likedRecipes', getLikedRecipesForUser);
 app.get('/api/user/:userId/sharedRecipes', getSharedRecipesForUser);
 
-function localStrategy(username, password, done) {
-    UserModel.findUserByUsername(username, password)
-        .then(
-            function(user) {
-                if (user && bcrypt.compareSync(password, user.password)) {
-                    return done(null, user);
-                }
-                return done(null, false);
-            },
-            function(err) {
-                if (err) {
-                    return done(err);
-                }
-            });
-}
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
 
 function authorized(req, res, next) {
     if (req.isAuthenticated()) {
@@ -58,7 +51,7 @@ function authorized(req, res, next) {
     }
 }
 
-function loginFn(req, res) {
+function loginLocalFn(req, res) {
     passport.authenticate('local', function(err, user, info) {
         if (!user) {
             return res.send(null);
@@ -68,6 +61,17 @@ function loginFn(req, res) {
         });
     })(req, res);
 }
+
+// function loginFacebookFn(req, res) {
+//     passport.authenticate('facebook', function(err, user, info) {
+//         if (!user) {
+//             return res.send(null);
+//         }
+//         req.logIn(user, function(err) {
+//             return res.send(user);
+//         });
+//     })(req, res);
+// }
 
 function logout(req, res) {
     req.logOut();
@@ -196,19 +200,4 @@ function getSharedRecipesForUser(req, res) {
     UserModel.getSharedRecipesForUser(userId).then(function(recipes) {
         return res.send(recipes);
     });
-}
-
-function serializeUser(user, done) {
-    done(null, user.id);
-}
-
-function deserializeUser(id, done) {
-    UserModel.findUserById(id)
-        .then(
-            function(user) {
-                done(null, user);
-            },
-            function(err) {
-                done(err, null);
-            });
 }
