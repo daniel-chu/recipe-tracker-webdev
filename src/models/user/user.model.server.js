@@ -6,6 +6,7 @@ UserModel.createUser = createUser;
 UserModel.findUserById = findUserById;
 UserModel.findUserByUsername = findUserByUsername;
 UserModel.findUserByFacebookId = findUserByFacebookId;
+UserModel.findUserByGoogleId = findUserByGoogleId;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.getLikedRecipesForUser = getLikedRecipesForUser;
@@ -35,6 +36,12 @@ function findUserByUsername(username) {
 
 function findUserByFacebookId(facebookId) {
     return UserModel.findOne({ "facebook.id" : facebookId}).then(function(user) {
+        return user;
+    });
+}
+
+function findUserByGoogleId(googleId) {
+    return UserModel.findOne({ "google.id" : googleId}).then(function(user) {
         return user;
     });
 }

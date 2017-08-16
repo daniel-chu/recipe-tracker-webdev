@@ -6,16 +6,19 @@ var UserFollowModel = require('../models/user/userfollow.model.server.js');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require('bcryptjs');
 
-require('../configPassport')(passport, LocalStrategy, FacebookStrategy, bcrypt, UserModel);
+require('../configPassport')(passport, LocalStrategy, FacebookStrategy, GoogleStrategy, bcrypt, UserModel);
 
 var auth = authorized;
 var login = loginLocalFn;
 var loginFb = loginFacebookFn;
+var loginGoogle = loginGoogleFn;
 
 app.post('/api/login', login);
 app.get('/auth/facebook', loginFb);
+app.get('/auth/google', loginGoogle);
 
 app.post('/api/logout', logout);
 app.get('/api/getLoggedInUser', getLoggedInUser);
@@ -39,7 +42,12 @@ app.get('/api/user/:userId/sharedRecipes', getSharedRecipesForUser);
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/#!/login' }),
     function(req, res) {
-        // Successful authentication, redirect home.
+        res.redirect('/#!/profile/');
+    });
+
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/#!/login' }),
+    function(req, res) {
         res.redirect('/#!/profile/');
     });
 
@@ -64,6 +72,17 @@ function loginLocalFn(req, res) {
 
 function loginFacebookFn(req, res) {
     passport.authenticate('facebook', function(err, user, info) {
+        if (!user) {
+            return res.send(null);
+        }
+        req.logIn(user, function(err) {
+            return res.send(user);
+        });
+    })(req, res);
+}
+
+function loginGoogleFn(req, res) {
+    passport.authenticate('google', { scope: ['profile', 'email'] }, function(err, user, info) {
         if (!user) {
             return res.send(null);
         }

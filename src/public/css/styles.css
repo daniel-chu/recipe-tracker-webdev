@@ -1,3 +1,13 @@
+.btn.btn-blue {
+    color: white;
+    background-color: rgba(59, 89, 152, 0.92);
+    border-color: rgba(59, 89, 152, 0.92);
+}
+
+.btn-half {
+    width: 49%;
+}
+
 .centered-tabs {
     text-align: center;
 }
@@ -130,6 +140,7 @@
 .profile-picture-container img {
     height: 200px;
     width: 200px;
+    border: 1px solid darkgray;
 }
 
 .profile-tab {
@@ -245,6 +256,10 @@
 }
 
 @media screen and (max-width: 480px) {
+    .btn-half {
+        width: 48%;
+    }
+
     #landing-page {
         text-align: center;
         background-color: rgba(0, 0, 0, 0.5);
@@ -306,5 +321,11 @@
 
     .recipe-picture .recipe-picture {
         margin-right: 15px;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .btn-half {
+        width: 49.5%;
     }
 }
