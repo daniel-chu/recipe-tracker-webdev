@@ -54,7 +54,6 @@
         }
 
         function storeRecipe(recipe) {
-            console.log(recipe);
             var recipeInfo = {
                 _id: recipe.recipe_id,
                 title: recipe.title,

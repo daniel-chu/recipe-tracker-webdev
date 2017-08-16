@@ -68,7 +68,6 @@
 
         function getUsersFollowing() {
             userService.getUsersFollowing(vm.user._id).then(function(usersFollowing) {
-                console.log(usersFollowing);
                 vm.usersFollowing = usersFollowing;
             });
         }
