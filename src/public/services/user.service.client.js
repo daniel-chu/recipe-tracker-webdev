@@ -149,7 +149,7 @@
 
         function shareRecipeForUser(recipe, userId) {
             return recipeService.storeRecipeIfNotExist(recipe).then(function(recipe) {
-                var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
+                var url = '/api/user/' + userId + '/share/' + recipe._id;
                 return $http({
                     method: 'POST',
                     url: url

@@ -64,22 +64,14 @@ function getSharedRecipesForUser(userId) {
 
 function likeRecipeForUser(userId, recipeId) {
     return findUserById(userId).then(function(user) {
-        // var array = [];
-        // array.push(recipeId);
-        // console.log(array);
-
-
-        var recipeMongoId = new mongoose.Types.ObjectId(recipeId);
-        user.likedRecipes.push(recipeMongoId);
+        user.likedRecipes.push(recipeId);
         return user.save();
     });
 }
 
 function shareRecipeForUser(userId, recipeId) {
     return findUserById(userId).then(function(user) {
-        var recipeMongoId = new mongoose.Types.ObjectId(recipeId);
-
-        user.sharedRecipes.push(recipeMongoId);
+        user.sharedRecipes.push(recipeId);
         return user.save();
     });
 }

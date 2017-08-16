@@ -81,7 +81,7 @@
                             <div class="container-fluid">
                                 <h4>Shared Recipes</h4>
                                 <div ng-repeat="recipe in model.sharedRecipes">
-                                    <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                    <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="container-fluid">
                                 <h4>Liked Recipes</h4>
                                 <div ng-repeat="recipe in model.likedRecipes">
-                                    <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                    <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
                                 </div>
                             </div>
                         </div>
