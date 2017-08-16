@@ -17,7 +17,6 @@
                         } else {
                             vm.error = 'Invalid username/password.';
                         }
-                        $rootScope.$apply();
                     });
             }
         }

@@ -1,3 +1,5 @@
+var mongoose = require("./database");
+
+require("./services/user.service.server.js");
 require("./services/recipe.service.server.js");
-require("./services/nutrition.service.server.js");
-require("./services/externalApi.service.server.js");
+require("./services/food2fork.service.server.js");

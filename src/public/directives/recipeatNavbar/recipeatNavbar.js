@@ -18,7 +18,6 @@
                             $('#nav-bar-user-name').text(user.username);
                         }
                         $scope.user = user;
-                        $scope.$apply();
                     });
                 }
             });
@@ -51,8 +50,6 @@
 
                     $rootScope.collapseNavbar();
                     $location.url('/');
-
-                    $rootScope.$apply();
                 });
             }
         }

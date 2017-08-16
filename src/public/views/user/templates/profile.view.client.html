@@ -50,17 +50,29 @@
                     </div>
                     <div class="visible-lg">
                         <ul class="nav nav-tabs">
-                            <li class="">
-                                <a class="profile-tab" data-target="#shared" data-toggle="tab">Shared Recipes</a>
+                            <li class="active">
+                                <a class="profile-tab"
+                                   data-target="#shared"
+                                   data-toggle="tab"
+                                   ng-click="model.getSharedRecipes()">Shared Recipes</a>
                             </li>
                             <li class="">
-                                <a class="profile-tab" data-target="#liked" data-toggle="tab">Liked Recipes</a>
+                                <a class="profile-tab"
+                                   data-target="#liked"
+                                   data-toggle="tab"
+                                   ng-click="model.getLikedRecipes()">Liked Recipes</a>
                             </li>
                             <li class="">
-                                <a class="profile-tab" data-target="#followers" data-toggle="tab">Followers</a>
+                                <a class="profile-tab"
+                                   data-target="#followers"
+                                   data-toggle="tab"
+                                   ng-click="model.getFollowers()">Followers</a>
                             </li>
                             <li class="">
-                                <a class="profile-tab" data-target="#following" data-toggle="tab">Following</a>
+                                <a class="profile-tab"
+                                   data-target="#following"
+                                   data-toggle="tab"
+                                   ng-click="model.getUsersFollowing()">Following</a>
                             </li>
                         </ul>
                     </div>

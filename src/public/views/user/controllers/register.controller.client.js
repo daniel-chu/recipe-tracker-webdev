@@ -21,8 +21,6 @@
                         $rootScope.loggedIn = true;
                         returnToPreviousPage();
                     }
-
-                    $rootScope.$apply();
                 });
         }
 

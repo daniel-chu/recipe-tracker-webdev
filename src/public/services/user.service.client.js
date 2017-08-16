@@ -3,39 +3,16 @@
         .service('userService', userService);
 
     function userService($rootScope, $location, $http, recipeService) {
-        // temp counter for prototype
-        var userIdCounter = 3;
-        var followIdCounter = 1;
-
-        var curUserId;
-
-        var users = [{
-                _id: '1',
-                username: 'alice',
-                password: 'alice',
-                sharedRecipes: ['35120'],
-                likedRecipes: ['2803']
-            },
-            {
-                _id: '2',
-                username: 'bob',
-                password: 'bob',
-                sharedRecipes: [],
-                likedRecipes: []
-            }
-        ]
-
-        var userFollows = [
-            { _id: '1', userId: '1', followedUserId: '2' }
-        ]
-
         var api = {
             login: login,
             logout: logout,
+            getLoggedInUser: getLoggedInUser,
+
             createUser: createUser,
             updateUser: updateUser,
+            validatePassword: validatePassword,
+            updatePassword: updatePassword,
             findUserByUsername: findUserByUsername,
-            getLoggedInUser: getLoggedInUser,
 
             createFollowFromUserToUser: createFollowFromUserToUser,
             likeRecipeForUser: likeRecipeForUser,
@@ -44,140 +21,192 @@
             getUsersFollowing: getUsersFollowing,
             getFollowers: getFollowers,
 
-            isUserFollowingUser: isUserFollowingUser
+            isUserFollowingUser: isUserFollowingUser,
+            getLikedRecipesForUser: getLikedRecipesForUser,
+            getSharedRecipesForUser: getSharedRecipesForUser
         }
 
         return api;
 
         function login(username, password) {
-            for (var i = 0; i < users.length; i++) {
-                if (username === users[i].username) {
-                    if (password === users[i].password) {
-                        return setLoggedInUser(users[i]);
-                    }
-                    break;
+            var url = '/api/login';
+            return $http({
+                method: 'POST',
+                url: url,
+                data: {
+                    username: username,
+                    password: password
                 }
-            }
-
-            return Promise.resolve(null);
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
         function logout() {
-            return setLoggedInUser(null);
-        }
-
-        function createUser(userInfo) {
-            userInfo._id = (userIdCounter++).toString();
-
-            users.push(userInfo);
-            return setLoggedInUser(userInfo);
-        }
-
-        function updateUser(userId, userInfo) {
-            for (var i = 0; i < users.length; i++) {
-                if (userId === users[i]._id) {
-                    users[i] = userInfo;
-                    return Promise.resolve(users[i]);
-                }
-            }
-            return Promise.resolve(null);
-        }
-
-        function findUserByUsername(username) {
-            for (var i = 0; i < users.length; i++) {
-                if (username === users[i].username) {
-                    return Promise.resolve(angular.copy(users[i]));
-                }
-            }
-            return Promise.resolve(null);
+            var url = '/api/logout';
+            return $http({
+                method: 'POST',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
         function getLoggedInUser() {
-            return Promise.resolve(getUserByUserId(curUserId));
+            var url = '/api/getLoggedInUser';
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function createUser(user) {
+            var url = '/api/user';
+            return $http({
+                method: 'POST',
+                url: url,
+                data: {
+                    user: user
+                }
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function updateUser(userId, user) {
+            var url = '/api/user/' + userId;
+            return $http({
+                method: 'PUT',
+                url: url,
+                data: {
+                    user: user
+                }
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function validatePassword(password) {
+            var url = '/api/validatepw';
+            return $http({
+                method: 'POST',
+                url: url,
+                data: {
+                    password: password
+                }
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function updatePassword(newPassword) {
+            var url = '/api/updatePassword';
+            return $http({
+                method: 'PUT',
+                url: url,
+                data: {
+                    newPassword: newPassword
+                }
+            }).then(function(response) {
+                return response.data;
+            })
+        }
+
+        function findUserByUsername(username) {
+            var url = '/api/user';
+            return $http({
+                method: 'GET',
+                url: url,
+                params: {
+                    username: username
+                }
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
         function createFollowFromUserToUser(userId, followedUserId) {
-            var relationship = {
-                _id: (followIdCounter++).toString(),
-                userId: userId,
-                followedUserId: followedUserId
-            }
-
-            userFollows.push(relationship);
-            return Promise.resolve(relationship);
+            var url = '/api/user/' + userId + '/follow/' + followedUserId;
+            return $http({
+                method: 'POST',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
         function likeRecipeForUser(recipe, userId) {
-            for (var i = 0; i < users.length; i++) {
-                if (userId === users[i]._id) {
-                    users[i].likedRecipes.push(recipe.recipe_id);
-                    return recipeService.cacheRecipe(recipe).then(function() {
-                        return users[i];
-                    });
-                }
-            }
+            return recipeService.storeRecipeIfNotExist(recipe).then(function(recipe) {
+                var url = '/api/user/' + userId + '/like/' + recipe._id;
+                return $http({
+                    method: 'POST',
+                    url: url
+                });
+            });
         }
 
         function shareRecipeForUser(recipe, userId) {
-            for (var i = 0; i < users.length; i++) {
-                if (userId === users[i]._id) {
-                    users[i].sharedRecipes.push(recipe.recipe_id);
-                    return recipeService.cacheRecipe(recipe).then(function() {
-                        return users[i];
-                    });
-                }
-            }
+            return recipeService.storeRecipeIfNotExist(recipe).then(function(recipe) {
+                var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
+                return $http({
+                    method: 'POST',
+                    url: url
+                });
+            });
         }
 
+        // gets who the user is following
         function getUsersFollowing(userId) {
-            var usersFollowing = [];
-
-            for (var i = 0; i < userFollows.length; i++) {
-                if (userId === userFollows[i].userId) {
-                    usersFollowing.push(getUserByUserId(userFollows[i].followedUserId));
-                }
-            }
-
-            return Promise.resolve(usersFollowing);
+            var url = '/api/user/' + userId + '/following';
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
+        // gets the users followers
         function getFollowers(userId) {
-            var followers = [];
-
-            for (var i = 0; i < userFollows.length; i++) {
-                if (userId === userFollows[i].followedUserId) {
-                    followers.push(getUserByUserId(userFollows[i].userId));
-                }
-            }
-
-            return Promise.resolve(followers);
+            var url = '/api/user/' + userId + '/followers';
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
         function isUserFollowingUser(userId1, userId2) {
-            for (var i = 0; i < userFollows.length; i++) {
-                if (userId1 === userFollows[i].userId) {
-                    if (userId2 === userFollows[i].followedUserId) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            var url = '/api/user/checkFollow/' + userId1 + '/' + userId2;
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
-        // temporary helper while this stuff is on client side for prototype
-        function getUserByUserId(userId) {
-            for (var i = 0; i < users.length; i++) {
-                if (userId === users[i]._id) {
-                    return users[i];
-                }
-            }
-            return null;
+        function getLikedRecipesForUser(userId) {
+            var url = '/api/user/' + userId + '/likedRecipes';
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
-        //TODO temporarily here for the prototype
-        function setLoggedInUser(userInfo) {
-            curUserId = userInfo ? userInfo._id : null;
-            return Promise.resolve(getUserByUserId(curUserId));
+        function getSharedRecipesForUser(userId) {
+            var url = '/api/user/' + userId + '/sharedRecipes';
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
         }
 
     }

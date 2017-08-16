@@ -2,7 +2,15 @@
     angular
         .module('RecipEat')
         .config(configuration)
-        .run(function($rootScope, $location, $window) {
+        .run(function($rootScope, $location, $window, userService) {
+            userService.getLoggedInUser().then(function(user) {
+                if(user) {
+                    $rootScope.loggedIn = true;
+                } else {
+                    $rootScope.loggedIn = false;
+                }
+            })
+
             $('.fading-popup-message .close').on('click', function() {
                 $('.fading-popup-message').stop({ clearQueue: true }).fadeOut(200);
             });

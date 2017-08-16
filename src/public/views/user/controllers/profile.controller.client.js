@@ -9,27 +9,15 @@
         vm.followThisUser = followThisUser;
         vm.isAlreadyFollowingUser = isAlreadyFollowingUser;
 
+        vm.getSharedRecipes = getSharedRecipes;
+        vm.getLikedRecipes = getLikedRecipes;
+        vm.getFollowers = getFollowers;
+        vm.getUsersFollowing = getUsersFollowing;
+
+
         function init() {
             retrieveUserForThisProfile().then(function(user) {
-                userService.getUsersFollowing(user._id).then(function(usersFollowing) {
-                    vm.usersFollowing = usersFollowing;
-                    $scope.$apply();
-                });
-
-                userService.getFollowers(user._id).then(function(followers) {
-                    vm.followers = followers;
-                    $scope.$apply();
-                });
-
-                recipeService.getCachedRecipeInfo(user.sharedRecipes).then(function(sharedRecipes) {
-                    vm.sharedRecipes = sharedRecipes;
-                    $scope.$apply();
-                });
-
-                recipeService.getCachedRecipeInfo(user.likedRecipes).then(function(likedRecipes) {
-                    vm.likedRecipes = likedRecipes;
-                    $scope.$apply();
-                });
+                getSharedRecipes();
             });
         }
 
@@ -46,7 +34,6 @@
                         }
                         vm.user = user;
                         vm.myProfile = false;
-                        $scope.$apply();
                         return Promise.resolve(vm.user);
                     });
             }
@@ -59,6 +46,31 @@
         //TODO COME BACK TO THIS AFTER SERVER SIDE IMPLEMENTED
         function isAlreadyFollowingUser(user) {
             return true;
+        }
+
+        function getSharedRecipes() {
+            userService.getSharedRecipesForUser(vm.user._id).then(function(sharedRecipes) {
+                vm.sharedRecipes = sharedRecipes;
+            });
+        }
+
+        function getLikedRecipes() {
+            userService.getLikedRecipesForUser(vm.user._id).then(function(likedRecipes) {
+                vm.likedRecipes = likedRecipes;
+            });
+        }
+
+        function getFollowers() {
+            userService.getFollowers(vm.user._id).then(function(followers) {
+                vm.followers = followers;
+            });
+        }
+
+        function getUsersFollowing() {
+            userService.getUsersFollowing(vm.user._id).then(function(usersFollowing) {
+                console.log(usersFollowing);
+                vm.usersFollowing = usersFollowing;
+            });
         }
 
         init();
