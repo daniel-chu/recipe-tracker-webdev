@@ -4,7 +4,7 @@
         .config(configuration)
         .run(function($rootScope, $location, $window, userService) {
             userService.getLoggedInUser().then(function(user) {
-                if(user) {
+                if (user) {
                     $rootScope.loggedIn = true;
                 } else {
                     $rootScope.loggedIn = false;
@@ -63,6 +63,9 @@
                     check: isNotLoggedIn
                 }
             })
+            .when('/profile', {
+                resolveRedirectTo: redirectToLoggedInUserProfile
+            })
             .when('/profile/:username', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
@@ -87,10 +90,6 @@
                     loggedInUser: getLoggedInUser
                 }
             })
-
-
-
-
             .when('/testNutritionix', {
                 templateUrl: 'views/test/templates/nutritionixTestSearch.view.client.html',
                 controller: 'nutritionixTestSearchController',
@@ -137,6 +136,15 @@
             .then(function(user) {
                 return user;
             });
+    }
+
+    function redirectToLoggedInUserProfile(userService) {
+        return getLoggedInUser(userService).then(function(user) {
+            if (user) {
+                return '/profile/' + user.username;
+            }
+            return '/login'
+        });
     }
 
 })();

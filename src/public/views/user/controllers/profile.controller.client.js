@@ -5,7 +5,7 @@
     function profileController($scope, $routeParams, userService, recipeService, loggedInUser) {
         var vm = this;
         vm.loggedInUser = loggedInUser;
-        vm.profileUsername = $routeParams['username'];
+        vm.profileUsername = $routeParams['username'] || loggedInUser.username;
         vm.followThisUser = followThisUser;
         vm.isAlreadyFollowingUser = isAlreadyFollowingUser;
 

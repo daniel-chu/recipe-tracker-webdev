@@ -5,6 +5,7 @@ var UserModel = mongoose.model('UserModel', UserSchema);
 UserModel.createUser = createUser;
 UserModel.findUserById = findUserById;
 UserModel.findUserByUsername = findUserByUsername;
+UserModel.findUserByFacebookId = findUserByFacebookId;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.getLikedRecipesForUser = getLikedRecipesForUser;
@@ -28,6 +29,12 @@ function findUserById(userId) {
 
 function findUserByUsername(username) {
     return UserModel.findOne({ username: username }).then(function(user) {
+        return user;
+    });
+}
+
+function findUserByFacebookId(facebookId) {
+    return UserModel.findOne({ "facebook.id" : facebookId}).then(function(user) {
         return user;
     });
 }

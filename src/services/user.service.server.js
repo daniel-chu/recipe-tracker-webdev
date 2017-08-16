@@ -12,10 +12,10 @@ require('../configPassport')(passport, LocalStrategy, FacebookStrategy, bcrypt, 
 
 var auth = authorized;
 var login = loginLocalFn;
-// var loginFb = loginFacebookFn;
+var loginFb = loginFacebookFn;
 
 app.post('/api/login', login);
-// app.get('/auth/facebook', loginFb);
+app.get('/auth/facebook', loginFb);
 
 app.post('/api/logout', logout);
 app.get('/api/getLoggedInUser', getLoggedInUser);
@@ -37,10 +37,10 @@ app.get('/api/user/:userId/likedRecipes', getLikedRecipesForUser);
 app.get('/api/user/:userId/sharedRecipes', getSharedRecipesForUser);
 
 app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    passport.authenticate('facebook', { failureRedirect: '/#!/login' }),
     function(req, res) {
         // Successful authentication, redirect home.
-        res.redirect('/');
+        res.redirect('/#!/profile/');
     });
 
 function authorized(req, res, next) {
@@ -62,16 +62,16 @@ function loginLocalFn(req, res) {
     })(req, res);
 }
 
-// function loginFacebookFn(req, res) {
-//     passport.authenticate('facebook', function(err, user, info) {
-//         if (!user) {
-//             return res.send(null);
-//         }
-//         req.logIn(user, function(err) {
-//             return res.send(user);
-//         });
-//     })(req, res);
-// }
+function loginFacebookFn(req, res) {
+    passport.authenticate('facebook', function(err, user, info) {
+        if (!user) {
+            return res.send(null);
+        }
+        req.logIn(user, function(err) {
+            return res.send(user);
+        });
+    })(req, res);
+}
 
 function logout(req, res) {
     req.logOut();

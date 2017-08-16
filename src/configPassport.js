@@ -3,7 +3,8 @@ module.exports = function(passport, LocalStrategy, FacebookStrategy, bcrypt, Use
     var facebookConfig = {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "/auth/facebook/callback"
+        callbackURL: "/auth/facebook/callback",
+        profileFields: ['id', 'picture.type(large)', 'first_name', 'last_name', 'email']
     }
 
     var googleConfig = {
@@ -11,7 +12,7 @@ module.exports = function(passport, LocalStrategy, FacebookStrategy, bcrypt, Use
     }
 
     passport.use(new LocalStrategy(localStrategy));
-    // passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -31,9 +32,43 @@ module.exports = function(passport, LocalStrategy, FacebookStrategy, bcrypt, Use
                 });
     }
 
-    // function facebookStrategy(accessToken, refreshToken, profile, callback) {
-    //     UserModel.findUserBy
-    // }
+    function facebookStrategy(accessToken, refreshToken, profile, done) {
+        UserModel.findUserByFacebookId(profile.id).then(function(existingUser) {
+            if (existingUser) {
+                return done(null, existingUser);
+            } else {
+                var profileInfo = profile._json;
+                return generateUsername(profileInfo.first_name, profileInfo.last_name, 1)
+                    .then(function(generatedUsername) {
+                        var newUserInfo = {
+                            username: generatedUsername,
+                            firstName: profileInfo.first_name,
+                            lastName: profileInfo.last_name,
+                            facebook: {
+                                id: profileInfo.id,
+                                token: accessToken
+                            },
+                            proPicUrl: profileInfo.picture.data.url
+                        }
+
+                        return UserModel.create(newUserInfo).then(function(newUser) {
+                            return done(null, newUser);
+                        });
+                    });
+            }
+        });
+    }
+
+    function generateUsername(firstName, lastName, iteration) {
+        var attemptedUsername = firstName.toLowerCase() + '-' + lastName.toLowerCase() + iteration;
+        return UserModel.findUserByUsername(attemptedUsername).then(function(existingUser) {
+            if (existingUser) {
+                return generateUsername(firstName, lastName, iteration + 1);
+            } else {
+                return attemptedUsername;
+            }
+        });
+    }
 
     function serializeUser(user, done) {
         done(null, user.id);

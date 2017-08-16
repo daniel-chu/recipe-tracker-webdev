@@ -2,10 +2,18 @@ var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
     username: { type: String, unique: true, required: true },
-    password: { type: String, required: true },
+    password: { type: String},
     firstName: String,
     lastName: String,
     email: String,
+    facebook: {
+        id: String,
+        token: String
+    },
+    google: {
+        id: String,
+        token: String
+    },
     proPicUrl: { type: String, default: '/assets/images/defaultProfilePicture.jpg' },
     sharedRecipes: [{ type: String, ref: 'RecipeModel' }],
     likedRecipes: [{ type: String, ref: 'RecipeModel' }],
