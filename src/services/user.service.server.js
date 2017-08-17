@@ -30,15 +30,21 @@ app.get('/api/user', findUserByUsername);
 app.put('/api/user/:userId', updateUser);
 
 app.post('/api/user/:userId/follow/:followedUserId', createFollowFromUserToUser);
-app.post('/api/user/:userId/unfollow/:followedUserId', deleteFollowFromUserToUser);
+app.delete('/api/user/:userId/follow/:followedUserId', deleteFollowFromUserToUser);
+
 app.post('/api/user/:userId/like/:recipeId', likeRecipeForUser);
 app.post('/api/user/:userId/share/:recipeId', shareRecipeForUser);
+app.delete('/api/user/:userId/like/:recipeId', unlikeRecipeForUser);
+app.delete('/api/user/:userId/share/:recipeId', unshareRecipeForUser);
 
 app.get('/api/user/:userId/following', getUsersFollowing);
 app.get('/api/user/:userId/followers', getFollowers);
 app.get('/api/user/checkFollow/:followingUserId/:followedUserId', isUserFollowingUser);
+
 app.get('/api/user/:userId/likedRecipes', getLikedRecipesForUser);
 app.get('/api/user/:userId/sharedRecipes', getSharedRecipesForUser);
+app.get('/api/user/:userId/checkLike/:recipeId', didUserLikeRecipe);
+app.get('/api/user/:userId/checkShare/:recipeId', didUserShareRecipe);
 
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/#!/login' }),
@@ -186,6 +192,24 @@ function shareRecipeForUser(req, res) {
     });
 }
 
+function unlikeRecipeForUser(req, res) {
+    var userId = req.params.userId;
+    var recipeId = req.params.recipeId;
+
+    UserModel.unlikeRecipeForUser(userId, recipeId).then(function(user) {
+        return res.send(user);
+    });
+}
+
+function unshareRecipeForUser(req, res) {
+    var userId = req.params.userId;
+    var recipeId = req.params.recipeId;
+
+    UserModel.unshareRecipeForUser(userId, recipeId).then(function(user) {
+        return res.send(user);
+    });
+}
+
 function getUsersFollowing(req, res) {
     var userId = req.params.userId;
 
@@ -228,5 +252,33 @@ function getSharedRecipesForUser(req, res) {
 
     UserModel.getSharedRecipesForUser(userId).then(function(recipes) {
         return res.send(recipes);
+    });
+}
+
+function didUserLikeRecipe(req, res) {
+    var userId = req.params.userId;
+    var recipeId = req.params.recipeId;
+
+    UserModel.getLikedRecipesForUser(userId).then(function(recipes) {
+        for (var i = 0; i < recipes.length; i++) {
+            if (recipes[i]._id == recipeId) {
+                res.send(true);
+            }
+        }
+        res.send(false);
+    });
+}
+
+function didUserShareRecipe(req, res) {
+    var userId = req.params.userId;
+    var recipeId = req.params.recipeId;
+
+    UserModel.getSharedRecipesForUser(userId).then(function(recipes) {
+        for (var i = 0; i < recipes.length; i++) {
+            if (recipes[i]._id == recipeId) {
+                res.send(true);
+            }
+        }
+        res.send(false);
     });
 }

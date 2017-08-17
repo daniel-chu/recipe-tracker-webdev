@@ -21,16 +21,27 @@
                     <h5 class="recipe-publisher-heading" ng-bind-html="'Created by ' + model.recipe.publisher"></h5>
                 </div>
                 <div ng-show="loggedIn" class="row like-share-button-row">
-                    <button hover-change
+                    <button ng-show="!model.isRecipeLiked"
                             class="btn btn-primary"
-                            ng-click="model.likeRecipe(model.recipe)"
-                            change-if="model.didUserLikeAlready()"
-                            change-to="Unlike">Like</button>
+                            ng-click="model.likeRecipe(model.recipe)">Like</button>
                     <button hover-change
+                            ng-show="model.isRecipeLiked"
+                            class="btn btn-primary"
+                            ng-click="model.unlikeRecipe(model.recipe)"
+                            change-if="model.isRecipeLiked"
+                            change-to="Unlike"
+                            change-color="red">&#10004; Liked</button>
+
+                    <button ng-show="!model.isRecipeShared"
                             class="btn btn-warning"
-                            ng-click="model.shareRecipe(model.recipe)"
-                            change-if="model.didUserShareAlready()"
-                            change-to="Unshare">Share</button>
+                            ng-click="model.shareRecipe(model.recipe)">Share</button>
+                    <button hover-change
+                            ng-show="model.isRecipeShared"
+                            class="btn btn-warning"
+                            ng-click="model.unshareRecipe(model.recipe)"
+                            change-if="model.isRecipeShared"
+                            change-to="Unshare"
+                            change-color="red">&#10004; Shared</button>
                 </div>
             </div>
         </div>

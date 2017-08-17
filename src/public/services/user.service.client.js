@@ -16,15 +16,21 @@
 
             createFollowFromUserToUser: createFollowFromUserToUser,
             deleteFollowFromUserToUser: deleteFollowFromUserToUser,
+
             likeRecipeForUser: likeRecipeForUser,
             shareRecipeForUser: shareRecipeForUser,
+            unlikeRecipeForUser: unlikeRecipeForUser,
+            unshareRecipeForUser: unshareRecipeForUser,
 
             getUsersFollowing: getUsersFollowing,
             getFollowers: getFollowers,
 
             isUserFollowingUser: isUserFollowingUser,
             getLikedRecipesForUser: getLikedRecipesForUser,
-            getSharedRecipesForUser: getSharedRecipesForUser
+            getSharedRecipesForUser: getSharedRecipesForUser,
+
+            didUserLikeRecipe: didUserLikeRecipe,
+            didUserShareRecipe: didUserShareRecipe
         }
 
         return api;
@@ -139,9 +145,9 @@
         }
 
         function deleteFollowFromUserToUser(userId, followedUserId) {
-            var url = '/api/user/' + userId + '/unfollow/' + followedUserId;
+            var url = '/api/user/' + userId + '/follow/' + followedUserId;
             return $http({
-                method: 'POST',
+                method: 'DELETE',
                 url: url
             }).then(function(response) {
                 return response.data;
@@ -165,6 +171,22 @@
                     method: 'POST',
                     url: url
                 });
+            });
+        }
+
+        function unlikeRecipeForUser(recipe, userId) {
+            var url = '/api/user/' + userId + '/like/' + recipe.recipe_id;
+            return $http({
+                method: 'DELETE',
+                url: url
+            });
+        }
+
+        function unshareRecipeForUser(recipe, userId) {
+            var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
+            return $http({
+                method: 'DELETE',
+                url: url
             });
         }
 
@@ -212,6 +234,26 @@
 
         function getSharedRecipesForUser(userId) {
             var url = '/api/user/' + userId + '/sharedRecipes';
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function didUserLikeRecipe(userId, recipeId) {
+            var url = '/api/user/' + userId + '/checkLike/' + recipeId;
+            return $http({
+                method: 'GET',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function didUserShareRecipe(userId, recipeId) {
+            var url = '/api/user/' + userId + '/checkShare/' + recipeId;
             return $http({
                 method: 'GET',
                 url: url

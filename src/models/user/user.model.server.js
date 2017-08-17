@@ -9,10 +9,13 @@ UserModel.findUserByFacebookId = findUserByFacebookId;
 UserModel.findUserByGoogleId = findUserByGoogleId;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
+
 UserModel.getLikedRecipesForUser = getLikedRecipesForUser;
 UserModel.getSharedRecipesForUser = getSharedRecipesForUser;
 UserModel.likeRecipeForUser = likeRecipeForUser;
 UserModel.shareRecipeForUser = shareRecipeForUser;
+UserModel.unlikeRecipeForUser = unlikeRecipeForUser;
+UserModel.unshareRecipeForUser = unshareRecipeForUser;
 
 module.exports = UserModel;
 
@@ -35,13 +38,13 @@ function findUserByUsername(username) {
 }
 
 function findUserByFacebookId(facebookId) {
-    return UserModel.findOne({ "facebook.id" : facebookId}).then(function(user) {
+    return UserModel.findOne({ "facebook.id": facebookId }).then(function(user) {
         return user;
     });
 }
 
 function findUserByGoogleId(googleId) {
-    return UserModel.findOne({ "google.id" : googleId}).then(function(user) {
+    return UserModel.findOne({ "google.id": googleId }).then(function(user) {
         return user;
     });
 }
@@ -86,6 +89,22 @@ function likeRecipeForUser(userId, recipeId) {
 function shareRecipeForUser(userId, recipeId) {
     return findUserById(userId).then(function(user) {
         user.sharedRecipes.push(recipeId);
+        return user.save();
+    });
+}
+
+function unlikeRecipeForUser(userId, recipeId) {
+    return findUserById(userId).then(function(user) {
+        var indexToRemove = user.likedRecipes.indexOf(recipeId);
+        user.likedRecipes.splice(indexToRemove, 1);
+        return user.save();
+    });
+}
+
+function unshareRecipeForUser(userId, recipeId) {
+    return findUserById(userId).then(function(user) {
+        var indexToRemove = user.sharedRecipes.indexOf(recipeId);
+        user.sharedRecipes.splice(indexToRemove, 1);
         return user.save();
     });
 }
