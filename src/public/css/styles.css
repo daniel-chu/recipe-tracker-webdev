@@ -313,7 +313,9 @@
     .search-results-container h4 {
         margin-top: 0px;
     }
+}
 
+@media screen and (max-width: 768px) {
     .search-result-publisher-text {
         max-width: 30vw;
     }
