@@ -6,48 +6,72 @@
         var vm = this;
 
         vm.updateUsername = updateUsername;
-        vm.updatePassword = updatePassword;
         vm.updateEmail = updateEmail;
+        vm.updatePassword = updatePassword;
 
         function init() {
             userService.getLoggedInUser().then(function(user) {
                 vm.user = user;
+                vm.isOAuthUser = !!(user.google || user.facebook);
             });
         }
 
         function updateUsername(password, newUsername) {
+            if (vm.isOAuthUser) {
+                if (newUsername) {
+                    return checkExistingUsernameAndUpdateIfNone(newUsername);
+                }
+                vm.unAlert = '';
+                vm.unError = 'Please fill in new username.';
+                return;
+            }
+
             if (!(password && newUsername)) {
                 vm.unAlert = '';
                 vm.unError = 'Please fill in all fields.';
                 return;
             }
 
-            userService.validatePassword(password).then(function(correct) {
+            return userService.validatePassword(password).then(function(correct) {
                 if (!correct) {
                     vm.unAlert = '';
                     vm.unError = 'Incorrect password.';
                     return;
                 } else {
-                    return userService.findUserByUsername(newUsername).then(function(existingUser) {
-                        if (existingUser) {
-                            vm.unAlert = '';
-                            vm.unError = 'Username already taken.';
-                            return;
-                        }
+                    return checkExistingUsernameAndUpdateIfNone(newUsername)
+                }
+            });;
+        }
 
-                        vm.user.username = newUsername;
-                        return userService.updateUser(vm.user._id, vm.user).then(function(user) {
-                            $rootScope.updateNavbarUsername();
+        function updateEmail(password, newEmail) {
+            if (vm.isOAuthUser) {
+                vm.user.email = newEmail;
+                return userService.updateUser(vm.user._id, vm.user).then(function(user) {
+                    vm.emAlert = 'Email successfully updated.';
+                    vm.emError = '';
+                });
+            }
 
-                            vm.unAlert = 'Username successfully updated.';
-                            vm.unError = '';
-                            return;
-                        });
+            if (!(password && newEmail)) {
+                vm.emAlert = '';
+                vm.emError = 'Please fill in all fields.';
+                return;
+            }
+
+            return userService.validatePassword(password).then(function(correct) {
+                if (!correct) {
+                    vm.emAlert = '';
+                    vm.emError = 'Incorrect password.';
+                    return;
+                } else {
+                    vm.user.email = newEmail;
+                    return userService.updateUser(vm.user._id, vm.user).then(function(user) {
+                        vm.emAlert = 'Email successfully updated.';
+                        vm.emError = '';
                     });
                 }
             });
         }
-
 
         function updatePassword(oldPassword, newPassword, newPasswordConfirm) {
             if (!(oldPassword && newPassword && newPasswordConfirm)) {
@@ -55,10 +79,12 @@
                 vm.pwError = 'Please fill in all fields.';
                 return;
             }
-            userService.validatePassword(oldPassword).then(function(correct) {
+
+            return userService.validatePassword(oldPassword).then(function(correct) {
                 if (!correct) {
                     vm.pwAlert = '';
                     vm.pwError = 'Incorrect password.';
+                    return;
                 } else {
                     if (newPassword != newPasswordConfirm) {
                         vm.pwAlert = '';
@@ -66,7 +92,7 @@
                         return;
                     }
 
-                    userService.updatePassword(newPassword).then(function(user) {
+                    return userService.updatePassword(newPassword).then(function(user) {
                         vm.pwAlert = 'Password successfully updated.';
                         vm.pwError = '';
                     });
@@ -74,23 +100,21 @@
             });
         }
 
-        function updateEmail(password, newEmail) {
-            if (!(password && newEmail)) {
-                vm.emAlert = '';
-                vm.emError = 'Please fill in all fields.';
-                return;
-            }
-            userService.validatePassword(password).then(function(correct) {
-                if (!correct) {
-                    vm.emAlert = '';
-                    vm.emError = 'Incorrect password.';
-                } else {
-                    vm.user.email = newEmail;
-                    userService.updateUser(vm.user._id, vm.user).then(function(user) {
-                        vm.emAlert = 'Email successfully updated.';
-                        vm.emError = '';
-                    });
+        function checkExistingUsernameAndUpdateIfNone(newUsername) {
+            return userService.findUserByUsername(newUsername).then(function(existingUser) {
+                if (existingUser) {
+                    vm.unAlert = '';
+                    vm.unError = 'Username already taken.';
+                    return;
                 }
+
+                vm.user.username = newUsername;
+                return userService.updateUser(vm.user._id, vm.user).then(function(user) {
+                    $rootScope.updateNavbarUsername();
+
+                    vm.unAlert = 'Username successfully updated.';
+                    vm.unError = '';
+                });
             });
         }
 

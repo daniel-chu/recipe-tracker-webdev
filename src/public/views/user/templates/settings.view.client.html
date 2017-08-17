@@ -10,7 +10,7 @@
             <div ng-show="model.unError" class="alert alert-danger">{{model.unError}}</div>
             <div ng-show="model.unAlert" class="alert alert-info">{{model.unAlert}}</div>
 
-            <div class="row">
+            <div ng-hide="model.isOAuthUser" class="row">
                 <input id="unPassword"
                        ng-model="model.unPassword"
                        name="unPassword"
@@ -46,7 +46,7 @@
             <div ng-show="model.emError" class="alert alert-danger">{{model.emError}}</div>
             <div ng-show="model.emAlert" class="alert alert-info">{{model.emAlert}}</div>
 
-            <div class="row">
+            <div ng-hide="model.isOAuthUser" class="row">
                 <input id="emPassword"
                        ng-model="model.emPassword"
                        name="emPassword"
@@ -76,7 +76,7 @@
 
         </div>
 
-        <div class="row">
+        <div ng-hide="model.isOAuthUser" class="row">
             <h3 class="hidden-xs">Change your password</h3>
             <h4 class="visible-xs">Change your password</h4>
 
