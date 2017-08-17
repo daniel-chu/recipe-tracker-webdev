@@ -1,3 +1,20 @@
+.admin-user-list-row {
+    border-top: 1px lightgray solid;
+}
+
+.admin-user-list-row:first-child {
+    border-top: none;
+}
+
+.admin-user-list-row .row {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.admin-user-list-row span.pull-right a {
+    margin-left: 10px;
+}
+
 .btn.btn-blue {
     color: white;
     background-color: rgba(59, 89, 152, 0.92);
