@@ -2,19 +2,17 @@
     angular.module('RecipEat')
         .controller('settingsController', settingsController);
 
-    function settingsController($scope, $rootScope, userService) {
+    function settingsController($scope, $rootScope, userService, checkLoggedIn) {
         var vm = this;
+        vm.user = checkLoggedIn;
+        vm.isOAuthUser = !!(vm.user.google || vm.user.facebook);
+
+        vm.newUsername = vm.user.username;
+        vm.newEmail = vm.user.email;
 
         vm.updateUsername = updateUsername;
         vm.updateEmail = updateEmail;
         vm.updatePassword = updatePassword;
-
-        function init() {
-            userService.getLoggedInUser().then(function(user) {
-                vm.user = user;
-                vm.isOAuthUser = !!(user.google || user.facebook);
-            });
-        }
 
         function updateUsername(password, newUsername) {
             if (vm.isOAuthUser) {
@@ -117,8 +115,6 @@
                 });
             });
         }
-
-        init();
     }
 
 })();

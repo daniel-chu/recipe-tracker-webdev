@@ -21,12 +21,15 @@
             </div>
 
             <div class="row">
-                <input id="newUsername"
-                       ng-model="model.newUsername"
-                       name="newUsername"
-                       class="form-control"
-                       placeholder="new username"
-                       dc-on-enter="model.updateUsername(model.unPassword, model.newUsername)"/>
+                <div class="input-group">
+                    <span class="input-group-addon">username</span>
+                    <input id="newUsername"
+                           ng-model="model.newUsername"
+                           name="newUsername"
+                           class="form-control"
+                           placeholder="username"
+                           dc-on-enter="model.updateUsername(model.unPassword, model.newUsername)"/>
+                </div>
             </div>
 
             <div class="row">
@@ -57,13 +60,16 @@
             </div>
 
             <div class="row">
-                <input id="newEmail"
-                       ng-model="model.newEmail"
-                       name="newEmail"
-                       type="email"
-                       class="form-control"
-                       placeholder="new email"
-                       dc-on-enter="model.updateEmail(model.emPassword, model.newEmail)"/>
+                <div class="input-group">
+                    <span class="input-group-addon">email</span>
+                    <input id="newEmail"
+                           ng-model="model.newEmail"
+                           name="newEmail"
+                           type="email"
+                           class="form-control"
+                           placeholder="email"
+                           dc-on-enter="model.updateEmail(model.emPassword, model.newEmail)"/>
+                </div>
             </div>
             
             <div class="row">

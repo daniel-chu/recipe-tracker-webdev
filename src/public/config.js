@@ -74,12 +74,20 @@
                     loggedInUser: getLoggedInUser
                 }
             })
+            .when('/editProfile', {
+                templateUrl: 'views/user/templates/editProfile.view.client.html',
+                controller: 'editProfileController',
+                controllerAs: 'model',
+                resolve: {
+                    checkLoggedIn: isLoggedIn
+                }
+            })
             .when('/settings', {
                 templateUrl: 'views/user/templates/settings.view.client.html',
                 controller: 'settingsController',
                 controllerAs: 'model',
                 resolve: {
-                    check: isLoggedIn
+                    checkLoggedIn: isLoggedIn
                 }
             })
             .when('/recipe/:recipeId', {
