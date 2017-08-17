@@ -7,7 +7,7 @@
         vm.loggedInUser = loggedInUser;
         vm.profileUsername = $routeParams['username'] || loggedInUser.username;
         vm.followThisUser = followThisUser;
-        vm.isAlreadyFollowingUser = isAlreadyFollowingUser;
+        vm.unfollowThisUser = unfollowThisUser;
 
         vm.getSharedRecipes = getSharedRecipes;
         vm.getLikedRecipes = getLikedRecipes;
@@ -18,6 +18,11 @@
         function init() {
             retrieveUserForThisProfile().then(function(user) {
                 getSharedRecipes();
+                userService.isUserFollowingUser(vm.loggedInUser._id, user._id)
+                    .then(function(isAlreadyFollowing) {
+                        vm.isFollowingUser = isAlreadyFollowing;
+                    });
+
             });
         }
 
@@ -40,12 +45,17 @@
         }
 
         function followThisUser(user) {
-            userService.createFollowFromUserToUser(vm.loggedInUser._id, user._id);
+            userService.createFollowFromUserToUser(vm.loggedInUser._id, user._id).then(function() {
+                vm.isFollowingUser = true;
+                getFollowers();
+            });
         }
 
-        //TODO COME BACK TO THIS AFTER SERVER SIDE IMPLEMENTED
-        function isAlreadyFollowingUser(user) {
-            return true;
+        function unfollowThisUser(user) {
+            userService.deleteFollowFromUserToUser(vm.loggedInUser._id, user._id).then(function() {
+                vm.isFollowingUser = false;
+                getFollowers();
+            });
         }
 
         function getSharedRecipes() {

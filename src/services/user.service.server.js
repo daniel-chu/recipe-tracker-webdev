@@ -30,6 +30,7 @@ app.get('/api/user', findUserByUsername);
 app.put('/api/user/:userId', updateUser);
 
 app.post('/api/user/:userId/follow/:followedUserId', createFollowFromUserToUser);
+app.post('/api/user/:userId/unfollow/:followedUserId', deleteFollowFromUserToUser);
 app.post('/api/user/:userId/like/:recipeId', likeRecipeForUser);
 app.post('/api/user/:userId/share/:recipeId', shareRecipeForUser);
 
@@ -155,6 +156,15 @@ function createFollowFromUserToUser(req, res) {
 
     UserFollowModel.createFollowBetweenUserAndUser(userId, followedUserId).then(function(follow) {
         return res.send(follow);
+    });
+}
+
+function deleteFollowFromUserToUser(req, res) {
+    var userId = req.params.userId;
+    var followedUserId = req.params.followedUserId;
+
+    UserFollowModel.deleteFollowBetweenUserAndUser(userId, followedUserId).then(function(deletedFollow) {
+        return res.send(deletedFollow);
     });
 }
 

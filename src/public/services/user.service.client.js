@@ -15,6 +15,7 @@
             findUserByUsername: findUserByUsername,
 
             createFollowFromUserToUser: createFollowFromUserToUser,
+            deleteFollowFromUserToUser: deleteFollowFromUserToUser,
             likeRecipeForUser: likeRecipeForUser,
             shareRecipeForUser: shareRecipeForUser,
 
@@ -129,6 +130,16 @@
 
         function createFollowFromUserToUser(userId, followedUserId) {
             var url = '/api/user/' + userId + '/follow/' + followedUserId;
+            return $http({
+                method: 'POST',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function deleteFollowFromUserToUser(userId, followedUserId) {
+            var url = '/api/user/' + userId + '/unfollow/' + followedUserId;
             return $http({
                 method: 'POST',
                 url: url

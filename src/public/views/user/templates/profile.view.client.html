@@ -17,11 +17,20 @@
                                 <a class="btn btn-info" href="#!/editProfile">Edit</a>
                             </div>
                             <div ng-hide="model.myProfile">
-                                <button hover-change
-                                        class="btn btn-primary"
-                                        ng-click="model.followThisUser(model.user)"
-                                        change-if="model.isAlreadyFollowingUser(model.user)"
-                                        change-to="Unfollow">Follow</button>
+                                <div ng-show="!model.isFollowingUser">
+                                    <button class="btn btn-primary"
+                                            ng-click="model.followThisUser(model.user)">Follow</button>
+                                </div>
+                                <div ng-show="model.isFollowingUser">
+                                    <button hover-change
+                                            class="btn btn-success"
+                                            ng-click="model.unfollowThisUser(model.user)"
+                                            change-if="model.isFollowingUser"
+                                            change-to="Unfollow"
+                                            change-color="red">
+                                            &#10004; Followed
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
