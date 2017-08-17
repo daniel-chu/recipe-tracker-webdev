@@ -27,7 +27,9 @@ app.put('/api/updatePassword', updatePassword);
 
 app.post('/api/user', createUser);
 app.get('/api/user', findUserByUsername);
+app.get('/api/users', findAllUsers);
 app.put('/api/user/:userId', updateUser);
+app.delete('/api/user/:userId', deleteUser);
 
 app.post('/api/user/:userId/follow/:followedUserId', createFollowFromUserToUser);
 app.delete('/api/user/:userId/follow/:followedUserId', deleteFollowFromUserToUser);
@@ -147,12 +149,28 @@ function findUserByUsername(req, res) {
     });
 }
 
+function findAllUsers(req, res) {
+    UserModel.findAllUsers().then(function(users) {
+        return res.send(users);
+    });
+}
+
 function updateUser(req, res) {
     var userId = req.params.userId;
     var user = req.body.user;
 
     UserModel.updateUser(userId, user).then(function(status) {
         return res.sendStatus(204);
+    });
+}
+
+function deleteUser(req, res) {
+    var userId = req.params.userId;
+
+    UserFollowModel.deleteAnyRelationshipsOfUser(userId).then(function(deletedFollows) {
+        UserModel.deleteUser(userId).then(function(deletedUser) {
+            return res.sendStatus(204);
+        });
     });
 }
 

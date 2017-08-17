@@ -3,6 +3,7 @@ var UserSchema = require('./user.schema.server.js');
 var UserModel = mongoose.model('UserModel', UserSchema);
 
 UserModel.createUser = createUser;
+UserModel.findAllUsers = findAllUsers;
 UserModel.findUserById = findUserById;
 UserModel.findUserByUsername = findUserByUsername;
 UserModel.findUserByFacebookId = findUserByFacebookId;
@@ -22,6 +23,12 @@ module.exports = UserModel;
 function createUser(user) {
     return UserModel.create(user).then(function(newUser) {
         return newUser;
+    });
+}
+
+function findAllUsers(user) {
+    return UserModel.find().then(function(users) {
+        return users;
     });
 }
 

@@ -10,9 +10,11 @@
 
             createUser: createUser,
             updateUser: updateUser,
+            deleteUser: deleteUser,
             validatePassword: validatePassword,
             updatePassword: updatePassword,
             findUserByUsername: findUserByUsername,
+            findAllUsers: findAllUsers,
 
             createFollowFromUserToUser: createFollowFromUserToUser,
             deleteFollowFromUserToUser: deleteFollowFromUserToUser,
@@ -95,6 +97,16 @@
             });
         }
 
+        function deleteUser(userId) {
+            var url = '/api/user/' + userId;
+            return $http({
+                method: 'DELETE',
+                url: url
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
         function validatePassword(password) {
             var url = '/api/validatepw';
             return $http({
@@ -129,6 +141,16 @@
                 params: {
                     username: username
                 }
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function findAllUsers() {
+            var url = '/api/users';
+            return $http({
+                method: 'GET',
+                url: url
             }).then(function(response) {
                 return response.data;
             });
@@ -262,5 +284,5 @@
             });
         }
     }
-    
+
 })();

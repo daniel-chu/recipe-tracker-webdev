@@ -8,6 +8,8 @@ UserFollowModel.getFollowBetweenUserAndUser = getFollowBetweenUserAndUser;
 UserFollowModel.getAllFollowersForUser = getAllFollowersForUser;
 UserFollowModel.getAllFollowingsForUser = getAllFollowingsForUser;
 
+UserFollowModel.deleteAnyRelationshipsOfUser = deleteAnyRelationshipsOfUser;
+
 module.exports = UserFollowModel;
 
 function createFollowBetweenUserAndUser(userFollowingId, userFollowedId) {
@@ -66,5 +68,12 @@ function getAllFollowingsForUser(userId) {
             }
 
             return follows.map(retrieveUserFollowed);
+        });
+}
+
+function deleteAnyRelationshipsOfUser(userId) {
+    return UserFollowModel.remove({ $or: [{ userFollowing: userId }, { userFollowed: userId }] })
+        .then(function(deletedFollows) {
+            return deletedFollows;
         });
 }
