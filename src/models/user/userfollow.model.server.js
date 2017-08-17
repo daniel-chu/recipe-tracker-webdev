@@ -68,5 +68,3 @@ function getAllFollowingsForUser(userId) {
             return follows.map(retrieveUserFollowed);
         });
 }
-
-

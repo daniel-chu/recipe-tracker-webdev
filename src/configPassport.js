@@ -16,6 +16,7 @@ module.exports = function(passport, LocalStrategy, FacebookStrategy, GoogleStrat
     passport.use(new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -122,6 +123,5 @@ module.exports = function(passport, LocalStrategy, FacebookStrategy, GoogleStrat
                     done(err, null);
                 });
     }
-
 
 }

@@ -3,7 +3,7 @@
         .directive('recipeatNavbar', ['$location', 'userService', recipeatNavbar]);
 
     function recipeatNavbar($location, userService) {
-
+        
         var controller = function($scope, $rootScope, $location) {
             $scope.searchRecipe = searchRecipe;
             $scope.redirectToLogin = redirectToLogin;
@@ -65,7 +65,5 @@
             templateUrl: 'directives/recipeatNavbar/recipeatNavbar.html'
         }
     }
-
-
 
 })();
