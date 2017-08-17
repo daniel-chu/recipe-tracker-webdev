@@ -2,6 +2,80 @@
 <div class="col-sm-6 content-panel">
     <div class="container-fluid">
         <h2>Settings</h2>
+
+        <div class="row">
+            <h3 class="hidden-xs">Change your username</h3>
+            <h4 class="visible-xs">Change your username</h4>
+
+            <div ng-show="model.unError" class="alert alert-danger">{{model.unError}}</div>
+            <div ng-show="model.unAlert" class="alert alert-info">{{model.unAlert}}</div>
+
+            <div class="row">
+                <input id="unPassword"
+                       ng-model="model.unPassword"
+                       name="unPassword"
+                       type="password"
+                       class="form-control"
+                       placeholder="password"
+                       dc-on-enter="model.updateUsername(model.unPassword, model.newUsername)"/>
+            </div>
+
+            <div class="row">
+                <input id="newUsername"
+                       ng-model="model.newUsername"
+                       name="newUsername"
+                       class="form-control"
+                       placeholder="new username"
+                       dc-on-enter="model.updateUsername(model.unPassword, model.newUsername)"/>
+            </div>
+
+            <div class="row">
+                <a class="btn btn-block btn-primary"
+                   role="button"
+                   ng-click="model.updateUsername(model.unPassword, model.newUsername)">
+                   change username
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <h3 class="hidden-xs">Change your email</h3>
+            <h4 class="visible-xs">Change your email</h4>
+
+            <div ng-show="model.emError" class="alert alert-danger">{{model.emError}}</div>
+            <div ng-show="model.emAlert" class="alert alert-info">{{model.emAlert}}</div>
+
+            <div class="row">
+                <input id="emPassword"
+                       ng-model="model.emPassword"
+                       name="emPassword"
+                       type="password"
+                       class="form-control"
+                       placeholder="password"
+                       dc-on-enter="model.updateEmail(model.emPassword, model.newEmail)"/>
+            </div>
+
+            <div class="row">
+                <input id="newEmail"
+                       ng-model="model.newEmail"
+                       name="newEmail"
+                       type="email"
+                       class="form-control"
+                       placeholder="new email"
+                       dc-on-enter="model.updateEmail(model.emPassword, model.newEmail)"/>
+            </div>
+            
+            <div class="row">
+                <a class="btn btn-block btn-primary"
+                   role="button"
+                   ng-click="model.updateEmail(model.emPassword, model.newEmail)">
+                   change email
+                </a>
+            </div>
+
+        </div>
+
         <div class="row">
             <h3 class="hidden-xs">Change your password</h3>
             <h4 class="visible-xs">Change your password</h4>
@@ -46,43 +120,9 @@
                    change password
                 </a>
             </div>
+
         </div>
 
-        <div class="row">
-            <h3 class="hidden-xs">Change your email</h3>
-            <h4 class="visible-xs">Change your email</h4>
-
-            <div ng-show="model.emError" class="alert alert-danger">{{model.emError}}</div>
-            <div ng-show="model.emAlert" class="alert alert-info">{{model.emAlert}}</div>
-
-            <div class="row">
-                <input id="password"
-                       ng-model="model.password"
-                       name="password"
-                       type="password"
-                       class="form-control"
-                       placeholder="password"
-                       dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
-            </div>
-
-            <div class="row">
-                <input id="newEmail"
-                       ng-model="model.newEmail"
-                       name="newEmail"
-                       type="email"
-                       class="form-control"
-                       placeholder="new email"
-                       dc-on-enter="model.updateEmail(model.password, model.newEmail)"/>
-            </div>
-            
-            <div class="row">
-                <a class="btn btn-block btn-primary"
-                   role="button"
-                   ng-click="model.updateEmail(model.password, model.newEmail)">
-                   change email
-                </a>
-            </div>
-        </div>
     </div>
 </div>
 <div class="col-sm-3"></div>

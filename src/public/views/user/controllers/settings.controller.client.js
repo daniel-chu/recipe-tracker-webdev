@@ -2,9 +2,10 @@
     angular.module('RecipEat')
         .controller('settingsController', settingsController);
 
-    function settingsController($scope, userService) {
+    function settingsController($scope, $rootScope, userService) {
         var vm = this;
 
+        vm.updateUsername = updateUsername;
         vm.updatePassword = updatePassword;
         vm.updateEmail = updateEmail;
 
@@ -13,6 +14,40 @@
                 vm.user = user;
             });
         }
+
+        function updateUsername(password, newUsername) {
+            if (!(password && newUsername)) {
+                vm.unAlert = '';
+                vm.unError = 'Please fill in all fields.';
+                return;
+            }
+
+            userService.validatePassword(password).then(function(correct) {
+                if (!correct) {
+                    vm.unAlert = '';
+                    vm.unError = 'Incorrect password.';
+                    return;
+                } else {
+                    return userService.findUserByUsername(newUsername).then(function(existingUser) {
+                        if (existingUser) {
+                            vm.unAlert = '';
+                            vm.unError = 'Username already taken.';
+                            return;
+                        }
+
+                        vm.user.username = newUsername;
+                        return userService.updateUser(vm.user._id, vm.user).then(function(user) {
+                            $rootScope.updateNavbarUsername();
+
+                            vm.unAlert = 'Username successfully updated.';
+                            vm.unError = '';
+                            return;
+                        });
+                    });
+                }
+            });
+        }
+
 
         function updatePassword(oldPassword, newPassword, newPasswordConfirm) {
             if (!(oldPassword && newPassword && newPasswordConfirm)) {

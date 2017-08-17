@@ -9,7 +9,7 @@
                 } else {
                     $rootScope.loggedIn = false;
                 }
-            })
+            });
 
             $('.fading-popup-message .close').on('click', function() {
                 $('.fading-popup-message').stop({ clearQueue: true }).fadeOut(200);
@@ -22,7 +22,7 @@
                 $('#fading-warning-message p').text(message);
                 $warningMessage.fadeIn(2000, function() {
                     $warningMessage.delay(5000).fadeOut(2000);
-                })
+                });
             }
 
             $rootScope.collapseNavbar = function() {

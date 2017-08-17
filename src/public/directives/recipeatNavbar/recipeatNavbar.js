@@ -11,7 +11,7 @@
             $scope.logout = logout;
             $scope.user;
 
-            $scope.$watch('loggedIn', function() {
+            $rootScope.updateNavbarUsername = function() {
                 if ($rootScope.loggedIn) {
                     userService.getLoggedInUser().then(function(user) {
                         if (user) {
@@ -22,7 +22,9 @@
                         $scope.user = user;
                     });
                 }
-            });
+            }
+
+            $scope.$watch('loggedIn', $rootScope.updateNavbarUsername);
 
             function searchRecipe() {
                 if ($scope.recipeSearchText) {
