@@ -268,13 +268,12 @@
     display: block;
 }
 
-.user-content-panel .row {
-    margin: 0 10px;
-}
-
 .user-content-panel {
     margin-top: 25px;
-    padding: 0px;
+}
+
+.user-content-panel .row {
+    margin: 0 10px;
 }
 
 .user-info-panel {
@@ -319,13 +318,17 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
     .search-result-publisher-text {
         max-width: 30vw;
     }
 
     .thumbnail-image {
         max-width: 30vw;
+    }
+
+    .user-content-panel {
+        margin-top: 25px;
     }
 }
 

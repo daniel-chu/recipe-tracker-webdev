@@ -18,11 +18,12 @@
         function init() {
             retrieveUserForThisProfile().then(function(user) {
                 getSharedRecipes();
-                userService.isUserFollowingUser(vm.loggedInUser._id, user._id)
-                    .then(function(isAlreadyFollowing) {
-                        vm.isFollowingUser = isAlreadyFollowing;
-                    });
-
+                if (vm.loggedInUser) {
+                    userService.isUserFollowingUser(vm.loggedInUser._id, user._id)
+                        .then(function(isAlreadyFollowing) {
+                            vm.isFollowingUser = isAlreadyFollowing;
+                        });
+                }
             });
         }
 
