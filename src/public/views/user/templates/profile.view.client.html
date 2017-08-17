@@ -101,18 +101,24 @@
 
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="shared">
-                            <div class="container-fluid">
+                            <div class="profile-tab-container container-fluid">
                                 <h4>Shared Recipes</h4>
                                 <div ng-repeat="recipe in model.sharedRecipes">
-                                    <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                    <div class="profile-tab-display-object">
+                                        <img ng-src={{recipe.image_url}} width="50px">
+                                        <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="liked">
-                            <div class="container-fluid">
+                            <div class="profile-tab-container container-fluid">
                                 <h4>Liked Recipes</h4>
                                 <div ng-repeat="recipe in model.likedRecipes">
-                                    <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                    <div class="profile-tab-display-object">
+                                        <img ng-src={{recipe.image_url}} width="50px">
+                                        <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -122,9 +128,7 @@
                                 <div ng-repeat="user in model.followers">
                                     <div class="profile-tab-display-object">
                                         <img ng-src={{user.proPicUrl}} width="50px" height="50px">
-                                        <div>
-                                            <a href="#!/profile/{{user.username}}">{{user.username}}</a>
-                                        </div>
+                                        <a href="#!/profile/{{user.username}}">{{user.username}}</a>
                                     </div>
                                 </div>
                             </div>

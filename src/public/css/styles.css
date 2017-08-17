@@ -159,19 +159,20 @@
 .profile-tab-display-object {
     float: left;
     max-width: 98%;
-    white-space: nowrap;
     border: 1px solid lightgray;
-    margin: 4px 6px 4px 0px;
+    margin: 4px 6px;
     padding: 8px;
     box-shadow: 3px 3px 10px #888888;
 }
 
 .profile-tab-display-object img {
+    float: left;
     margin-right: 5px;
 }
 
-.profile-tab-display-object div {
-    display: inline-block;
+.profile-tab-display-object a {
+    float: left;
+    word-break: break-all;
 }
 
 #recipeat-content-container {
@@ -305,7 +306,6 @@
     .profile-tab-display-object {
         float: none;
         display: inline-block;
-        white-space: normal;
         text-align: left;
         font-size: .87em;
     }
