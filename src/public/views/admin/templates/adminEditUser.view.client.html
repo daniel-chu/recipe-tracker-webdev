@@ -1,0 +1,79 @@
+<div class="col-sm-2">
+</div>
+<div class="col-sm-8 content-panel">
+    <div class="container-fluid">
+        <h2>Edit {{model.username}}</h2>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+        <div ng-show="model.alert" class="alert alert-info">{{model.alert}}</div>
+
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">username</span>
+                <input id="username"
+                       ng-model="model.user.username"
+                       name="username"
+                       class="form-control"
+                       placeholder="username"
+                       maxlength="26"
+                       dc-on-enter="model.updateUser()"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">email</span>
+                <input id="email"
+                       ng-model="model.user.email"
+                       name="email"
+                       class="form-control"
+                       type="email"
+                       placeholder="email"
+                       dc-on-enter="model.updateUser()"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">first name</span>
+                <input id="firstName"
+                       ng-model="model.user.firstName"
+                       name="firstName"
+                       class="form-control"
+                       placeholder="first name"
+                       dc-on-enter="model.updateUser()"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">last name</span>
+                <input id="lastName"
+                       ng-model="model.user.lastName"
+                       name="lastName"
+                       class="form-control"
+                       placeholder="last name"
+                       dc-on-enter="model.updateUser()"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-primary"
+               role="button"
+               ng-click="model.updateUser()">Update User</a>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-danger"
+               role="button"
+               ng-click="model.deleteUser()">Delete User</a>
+        </div>
+
+        <div class="row">
+            <a class="btn btn-block btn-default"
+               href="#!/admin"
+               role="button">Cancel</a>
+        </div>
+
+    </div>
+</div>
+<div class="col-sm-2"></div>

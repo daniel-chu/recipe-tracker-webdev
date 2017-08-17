@@ -116,6 +116,14 @@
                     admin: checkAdmin
                 }
             })
+            .when('/admin/edit/:username', {
+                templateUrl: 'views/admin/templates/adminEditUser.view.client.html',
+                controller: 'adminEditUserController',
+                controllerAs: 'model',
+                resolve: {
+                    admin: checkAdmin
+                }
+            })
             .otherwise({
                 templateUrl: 'views/error/templates/pageNotFound.view.client.html'
             });
