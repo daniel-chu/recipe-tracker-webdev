@@ -148,6 +148,31 @@
     font-size: 0.9em;
 }
 
+.profile-tab-container {
+    padding: 0 15px 15px 15px;
+}
+
+.profile-tab-container h4 {
+    margin-left: 10px;
+}
+
+.profile-tab-display-object {
+    float: left;
+    max-width: 98%;
+    white-space: nowrap;
+    border: 1px solid lightgray;
+    margin: 4px 6px 4px 0px;
+    padding: 8px;
+    box-shadow: 3px 3px 10px #888888;
+}
+
+.profile-tab-display-object img {
+    margin-right: 5px;
+}
+
+.profile-tab-display-object div {
+    display: inline-block;
+}
 
 #recipeat-content-container {
     padding: 15px;
@@ -244,6 +269,7 @@
 
 .user-content-panel {
     margin-top: 25px;
+    padding: 0px;
 }
 
 .user-info-panel {
@@ -271,8 +297,17 @@
         font-size: 48px;
     }
 
-    .thumbnail-image {
-        max-width: 30vw;
+    .profile-tab-container {
+        padding: 0 5px 15px 5px;
+        text-align: center;
+    }
+
+    .profile-tab-display-object {
+        float: none;
+        display: inline-block;
+        white-space: normal;
+        text-align: left;
+        font-size: .87em;
     }
 
     .search-results-container h4 {
@@ -280,6 +315,10 @@
     }
 
     .search-result-publisher-text {
+        max-width: 30vw;
+    }
+
+    .thumbnail-image {
         max-width: 30vw;
     }
 }
