@@ -29,6 +29,7 @@
                         <span class="glyphicon glyphicon-cog"></span>
                     </a>
                     <ul class="dropdown-menu">
+                        <li ng-show="isUserAdmin"><a href="#!/admin">admin panel</a></li>
                         <li><a href="#!/settings">settings</a></li>
                         <li><a ng-click="logout()">logout</a></li>
                     </ul>

@@ -66,6 +66,10 @@
     transform: translateX(-50%);
 }
 
+.fading-popup-message p {
+    font-size: 1.2em;
+}
+
 .float-left {
     float: left;
 }

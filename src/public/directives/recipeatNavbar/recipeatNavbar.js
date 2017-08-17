@@ -11,20 +11,21 @@
             $scope.logout = logout;
             $scope.user;
 
-            $rootScope.updateNavbarUsername = function() {
+            $rootScope.updateNavbar = function() {
                 if ($rootScope.loggedIn) {
                     userService.getLoggedInUser().then(function(user) {
                         if (user) {
                             if (user.username.length <= 16) {
                                 $('#nav-bar-user-name').text(user.username);
                             }
+                            $rootScope.isUserAdmin = (user.role === 'ADMIN');
                         }
                         $scope.user = user;
                     });
                 }
             }
 
-            $scope.$watch('loggedIn', $rootScope.updateNavbarUsername);
+            $scope.$watch('loggedIn', $rootScope.updateNavbar);
 
             function searchRecipe() {
                 if ($scope.recipeSearchText) {

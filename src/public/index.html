@@ -37,6 +37,7 @@
     <script src="services/user.service.client.js"></script>
     <script src="services/recipe.service.client.js"></script>
     <!-- Controllers -->
+    <script src="views/admin/controllers/adminPanel.controller.client.js"></script>
     <script src="views/recipe/controllers/recipeSearch.controller.client.js"></script>
     <script src="views/recipe/controllers/recipeDetails.controller.client.js"></script>
     <script src="views/user/controllers/login.controller.client.js"></script>
@@ -50,6 +51,10 @@
     <recipeat-navbar></recipeat-navbar>
     <div id="main-panel">
         <div id="fading-warning-message" class="alert alert-dismissable alert-warning fading-popup-message">
+            <button type="button" class="close">&times;</button>
+            <p></p>
+        </div>
+        <div id="fading-danger-message" class="alert alert-dismissable alert-danger fading-popup-message">
             <button type="button" class="close">&times;</button>
             <p></p>
         </div>

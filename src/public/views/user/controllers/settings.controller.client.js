@@ -108,7 +108,7 @@
 
                 vm.user.username = newUsername;
                 return userService.updateUser(vm.user._id, vm.user).then(function(user) {
-                    $rootScope.updateNavbarUsername();
+                    $rootScope.updateNavbar();
 
                     vm.unAlert = 'Username successfully updated.';
                     vm.unError = '';

@@ -25,6 +25,16 @@
                 });
             }
 
+            $rootScope.displayFadeDanger = function(message) {
+                var $dangerMessage = $('#fading-danger-message');
+                $dangerMessage.hide().stop({ clearQueue: true });
+
+                $('#fading-danger-message p').text(message);
+                $dangerMessage.fadeIn(2000, function() {
+                    $dangerMessage.delay(5000).fadeOut(2000);
+                });
+            }
+
             $rootScope.collapseNavbar = function() {
                 if ($('#collapsible-navigationbar').hasClass('collapse in')) {
                     $('.navbar-toggle').click();
@@ -98,15 +108,13 @@
                     loggedInUser: getLoggedInUser
                 }
             })
-            .when('/testNutritionix', {
-                templateUrl: 'views/test/templates/nutritionixTestSearch.view.client.html',
-                controller: 'nutritionixTestSearchController',
-                controllerAs: 'model'
-            })
-            .when('/testNutritionix/nutritionInfo/:nid', {
-                templateUrl: 'views/test/templates/nutritionDetails.view.client.html',
-                controller: 'nutritionDetailsController',
-                controllerAs: 'model'
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/adminPanel.view.client.html',
+                controller: 'adminPanelController',
+                controllerAs: 'model',
+                resolve: {
+                    admin: checkAdmin
+                }
             })
             .otherwise({
                 templateUrl: 'views/error/templates/pageNotFound.view.client.html'
@@ -142,6 +150,18 @@
     function getLoggedInUser(userService) {
         return userService.getLoggedInUser()
             .then(function(user) {
+                return user;
+            });
+    }
+
+    function checkAdmin($rootScope, $location, userService) {
+        return userService.getLoggedInUser()
+            .then(function(user) {
+                if (user.role !== 'ADMIN') {
+                    $location.url('');
+                    $rootScope.displayFadeDanger('Unauthorized to view this page.')
+                    return null;
+                }
                 return user;
             });
     }
