@@ -121,6 +121,14 @@
                     admin: checkAdmin
                 }
             })
+            .when('/admin/createUser', {
+                templateUrl: 'views/admin/templates/adminCreateUser.view.client.html',
+                controller: 'adminCreateUserController',
+                controllerAs: 'model',
+                resolve: {
+                    admin: checkAdmin
+                }
+            })
             .when('/admin/edit/:username', {
                 templateUrl: 'views/admin/templates/adminEditUser.view.client.html',
                 controller: 'adminEditUserController',

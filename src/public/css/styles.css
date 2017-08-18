@@ -20,6 +20,10 @@
     height: 200px;
 }
 
+.admin-panel>a {
+    margin-bottom:10px;
+}
+
 .admin-user-list-row {
     border-top: 1px lightgray solid;
 }

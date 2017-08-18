@@ -9,6 +9,7 @@
             getLoggedInUser: getLoggedInUser,
 
             createUser: createUser,
+            createUserNoLogin: createUserNoLogin,
             updateUser: updateUser,
             deleteUser: deleteUser,
             validatePassword: validatePassword,
@@ -73,6 +74,19 @@
 
         function createUser(user) {
             var url = '/api/user';
+            return $http({
+                method: 'POST',
+                url: url,
+                data: {
+                    user: user
+                }
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function createUserNoLogin(user) {
+            var url = '/api/admin/user';
             return $http({
                 method: 'POST',
                 url: url,

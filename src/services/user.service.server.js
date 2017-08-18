@@ -26,6 +26,7 @@ app.post('/api/validatepw', validatePassword);
 app.put('/api/updatePassword', updatePassword);
 
 app.post('/api/user', createUser);
+app.post('/api/admin/user', createUserNoLogin);
 app.get('/api/user', findUserByUsername);
 app.get('/api/users', findAllUsers);
 app.put('/api/user/:userId', updateUser);
@@ -138,6 +139,17 @@ function createUser(req, res) {
             req.logIn(newUser, function(err) {
                 return res.send(newUser);
             });
+        });
+}
+
+function createUserNoLogin(req, res) {
+    var user = req.body.user;
+    var salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(user.password, salt);
+
+    UserModel.createUser(user)
+        .then(function(newUser) {
+            return res.send(newUser);
         });
 }
 
