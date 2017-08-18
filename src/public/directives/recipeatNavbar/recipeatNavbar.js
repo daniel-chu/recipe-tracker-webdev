@@ -56,11 +56,7 @@
             }
 
             function goBack() {
-                if ($window.document.referrer.indexOf($location.host()) !== -1) {
-                    $window.history.back();
-                } else {
-                    $location.url('/');
-                }
+                $window.history.back();
             }
 
             function logout() {
