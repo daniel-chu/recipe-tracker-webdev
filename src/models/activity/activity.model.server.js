@@ -4,11 +4,16 @@ var ActivitySchema = require('./activity.schema.server.js');
 var ActivityModel = mongoose.model('ActivityModel', ActivitySchema);
 var UserFollowModel = require('../user/userfollow.model.server.js');
 
+//TODO change this when done
+var activityCollectionLimit = 5;
+
 ActivityModel.createActivity = createActivity;
 ActivityModel.deleteActivity = deleteActivity;
 ActivityModel.getXActivitiesForUser = getXActivitiesForUser
 
 function createActivity(activity) {
+    cleanUpActivityCollectionIfOverLimit();
+
     return ActivityModel.create(activity).then(function(newActivity) {
         return newActivity;
     });
@@ -37,6 +42,21 @@ function getXActivitiesForUser(start, end, userId) {
             .then(function(activities) {
                 return activities;
             });
+    });
+}
+
+function cleanUpActivityCollectionIfOverLimit() {
+    ActivityModel.count().then(function(count) {
+        if (count > activityCollectionLimit) {
+            ActivityModel.find()
+                .sort({ dateCreated: 1 })
+                .limit(activityCollectionLimit * 0.2)
+                .exec()
+                .then(function(activitiesToRemove) {
+                    var ids = activitiesToRemove.map(function(activity) { return activity._id });
+                    ActivityModel.remove({ _id: { $in: ids } }).exec();
+                });
+        }
     });
 }
 
