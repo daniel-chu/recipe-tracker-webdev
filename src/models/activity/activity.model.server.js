@@ -4,7 +4,6 @@ var ActivitySchema = require('./activity.schema.server.js');
 var ActivityModel = mongoose.model('ActivityModel', ActivitySchema);
 var UserFollowModel = require('../user/userfollow.model.server.js');
 
-//TODO change this when done
 var activityCollectionLimit = 5000;
 
 ActivityModel.createActivity = createActivity;
