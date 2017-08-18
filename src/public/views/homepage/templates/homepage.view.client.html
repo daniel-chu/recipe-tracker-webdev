@@ -21,7 +21,9 @@
                         </a>{{activity.action === 'LIKE' ? " liked..." : " shared..."}}
                     </div>
                     <div class="panel-body">
-                        <a href="#!/recipe/{{activity.recipe.recipe_id}}">
+                        <a href="#!/recipe/{{activity.recipe.recipe_id}}"
+                           data-toggle="tooltip"
+                           title="{{activity.recipe.title}}">
                             {{activity.recipe.title}}
                         </a>
                         <div class="picture-container">

@@ -1,5 +1,5 @@
 .activity-box-container {
-    word-wrap: break-word;
+    white-space: nowrap;
     width: 33%;
     float: left;
     text-align: center;
@@ -15,13 +15,18 @@
     max-height: 100%;
 }
 
+.activity-box .panel-body {
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .activity-box .panel-body .picture-container {
     margin-top: 10px;
     height: 200px;
 }
 
-.admin-panel>a {
-    margin-bottom:10px;
+.admin-panel > a {
+    margin-bottom: 10px;
 }
 
 .admin-user-list-row {
@@ -67,7 +72,7 @@
     min-height: 100px;
 }
 
-.container-fluid>.row {
+.container-fluid > .row {
     margin: 7px 5px;
 }
 
@@ -187,7 +192,7 @@
     background: #e95420;
 }
 
-.nav-tabs>li>a {
+.nav-tabs > li > a {
     margin-right: 0;
 }
 
@@ -402,6 +407,8 @@
 
 @media screen and (max-width: 600px) {
     .activity-box-container {
+        white-space: normal;
+        word-wrap: break-word;
         width: 100%;
     }
 
