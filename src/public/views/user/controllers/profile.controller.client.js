@@ -2,7 +2,7 @@
     angular.module('RecipEat')
         .controller('profileController', profileController);
 
-    function profileController($scope, $routeParams, userService, recipeService, loggedInUser) {
+    function profileController($routeParams, userService, loggedInUser) {
         var vm = this;
         vm.loggedInUser = loggedInUser;
         vm.profileUsername = $routeParams['username'] || loggedInUser.username;

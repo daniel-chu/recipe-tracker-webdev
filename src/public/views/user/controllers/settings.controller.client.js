@@ -2,7 +2,7 @@
     angular.module('RecipEat')
         .controller('settingsController', settingsController);
 
-    function settingsController($scope, $rootScope, userService, checkLoggedIn) {
+    function settingsController($rootScope, userService, checkLoggedIn) {
         var vm = this;
         vm.user = checkLoggedIn;
         vm.isOAuthUser = !!(vm.user.google || vm.user.facebook);
