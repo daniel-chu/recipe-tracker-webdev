@@ -2,7 +2,7 @@
     angular.module('RecipEat')
         .service('userService', userService);
 
-    function userService($rootScope, $location, $http, recipeService) {
+    function userService($rootScope, $location, $http, recipeService, activityService) {
         var api = {
             login: login,
             logout: logout,
@@ -178,38 +178,50 @@
 
         function likeRecipeForUser(recipe, userId) {
             return recipeService.storeRecipeIfNotExist(recipe).then(function(recipe) {
-                var url = '/api/user/' + userId + '/like/' + recipe.recipe_id;
-                return $http({
-                    method: 'POST',
-                    url: url
-                });
+                return activityService.createActivity(userId, 'LIKE', recipe.recipe_id)
+                    .then(function(activity) {
+                        var url = '/api/user/' + userId + '/like/' + recipe.recipe_id;
+                        return $http({
+                            method: 'POST',
+                            url: url
+                        });
+                    });
             });
         }
 
         function shareRecipeForUser(recipe, userId) {
             return recipeService.storeRecipeIfNotExist(recipe).then(function(recipe) {
-                var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
-                return $http({
-                    method: 'POST',
-                    url: url
-                });
+                return activityService.createActivity(userId, 'SHARE', recipe.recipe_id)
+                    .then(function(activity) {
+                        var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
+                        return $http({
+                            method: 'POST',
+                            url: url
+                        });
+                    });
             });
         }
 
         function unlikeRecipeForUser(recipe, userId) {
-            var url = '/api/user/' + userId + '/like/' + recipe.recipe_id;
-            return $http({
-                method: 'DELETE',
-                url: url
-            });
+            return activityService.deleteActivity(userId, 'LIKE', recipe.recipe_id)
+                .then(function(activity) {
+                    var url = '/api/user/' + userId + '/like/' + recipe.recipe_id;
+                    return $http({
+                        method: 'DELETE',
+                        url: url
+                    });
+                });
         }
 
         function unshareRecipeForUser(recipe, userId) {
-            var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
-            return $http({
-                method: 'DELETE',
-                url: url
-            });
+            return activityService.deleteActivity(userId, 'SHARE', recipe.recipe_id)
+                .then(function(activity) {
+                    var url = '/api/user/' + userId + '/share/' + recipe.recipe_id;
+                    return $http({
+                        method: 'DELETE',
+                        url: url
+                    });
+                });
         }
 
         // gets who the user is following

@@ -50,7 +50,12 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'views/homepage/templates/homepage.view.client.html'
+                templateUrl: 'views/homepage/templates/homepage.view.client.html',
+                controller: 'homePageController',
+                controllerAs: 'model',
+                resolve: {
+                    loggedInUser: getLoggedInUser
+                }
             })
             .when('/search/recipe/:recipeSearchText', {
                 templateUrl: 'views/recipe/templates/recipeSearch.view.client.html',

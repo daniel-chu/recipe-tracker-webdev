@@ -8,10 +8,7 @@
         vm.updateUser = updateUser;
 
         function updateUser() {
-            console.log(vm.user._id);
-            console.log(vm.user);
             userService.updateUser(vm.user._id, vm.user).then(function(user) {
-                console.log(user);
                 $location.url('/profile');
             });
         }

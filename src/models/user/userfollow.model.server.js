@@ -7,6 +7,7 @@ UserFollowModel.deleteFollowBetweenUserAndUser = deleteFollowBetweenUserAndUser;
 UserFollowModel.getFollowBetweenUserAndUser = getFollowBetweenUserAndUser;
 UserFollowModel.getAllFollowersForUser = getAllFollowersForUser;
 UserFollowModel.getAllFollowingsForUser = getAllFollowingsForUser;
+UserFollowModel.getAllUserIdsThisUserFollows = getAllUserIdsThisUserFollows;
 
 UserFollowModel.deleteAnyRelationshipsOfUser = deleteAnyRelationshipsOfUser;
 
@@ -68,6 +69,17 @@ function getAllFollowingsForUser(userId) {
             }
 
             return follows.map(retrieveUserFollowed);
+        });
+}
+
+function getAllUserIdsThisUserFollows(userId) {
+    return UserFollowModel.find({ userFollowing: userId })
+        .then(function(follows) {
+            var retrieveUserFollowedId = function(follow) {
+                return follow.userFollowed;
+            }
+
+            return follows.map(retrieveUserFollowedId);
         });
 }
 
