@@ -5,7 +5,7 @@ var ActivityModel = mongoose.model('ActivityModel', ActivitySchema);
 var UserFollowModel = require('../user/userfollow.model.server.js');
 
 //TODO change this when done
-var activityCollectionLimit = 5;
+var activityCollectionLimit = 5000;
 
 ActivityModel.createActivity = createActivity;
 ActivityModel.deleteActivity = deleteActivity;
@@ -38,6 +38,8 @@ function getXActivitiesForUser(start, end, userId) {
             .sort({ dateCreated: -1 })
             .skip(start)
             .limit(limit)
+            .populate('recipe')
+            .populate('user', 'username')
             .exec()
             .then(function(activities) {
                 return activities;

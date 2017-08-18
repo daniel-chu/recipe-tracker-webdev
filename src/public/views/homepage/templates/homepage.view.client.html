@@ -1,7 +1,31 @@
 <div class="container-fluid ">
     <div id="landing-page">
-        <h1>RecipEat</h1>
-        <h3>An easy way to find, track, and share recipes you love.</h3>
+        <div id="landing-page-heading">
+            <h1>RecipEat</h1>
+            <h3>An easy way to find, track, and share recipes you love.</h3>
+        </div>
+        <div ng-show="loggedIn" class="user-activity-panel clearfix">
+            <h3>Activity Stream</h3>
+            <div class="activity-box-container" ng-repeat="activity in model.activities">
+                <div class="panel panel-warning activity-box">
+                    <div class="panel-heading">
+                        <a href="#!/profile/{{activity.user.username}}">
+                            {{activity.user.username}}
+                        </a>{{activity.action === 'LIKE' ? " liked..." : " shared..."}}
+                    </div>
+                    <div class="panel-body">
+                        <a href="#!/recipe/{{activity.recipe.recipe_id}}">
+                            {{activity.recipe.title}}
+                        </a>
+                        <div class="picture-container">
+                            <a href="#!/recipe/{{activity.recipe.recipe_id}}">
+                                <img ng-src="{{activity.recipe.image_url}}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </div>

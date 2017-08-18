@@ -1,3 +1,25 @@
+.activity-box-container {
+    word-wrap: break-word;
+    width: 33%;
+    float: left;
+    text-align: center;
+}
+
+.activity-box {
+    display: inline-block;
+    width: 90%;
+}
+
+.activity-box img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.activity-box .panel-body .picture-container {
+    margin-top: 10px;
+    height: 200px;
+}
+
 .admin-user-list-row {
     border-top: 1px lightgray solid;
 }
@@ -110,17 +132,21 @@
     padding: 10px 28px;
 }
 
-#landing-page>h1 {
+#landing-page h1 {
     font-size: 60px;
     margin-top: 5px;
 }
 
-#landing-page>h1,
-#landing-page>h2,
-#landing-page>h3 {
+#landing-page h1,
+#landing-page h2,
+#landing-page h3 {
     color: white;
     outline-color: black;
     text-shadow: #000 0px 0px 4px;
+}
+
+#landing-page-heading {
+    margin-bottom: 30px;
 }
 
 .like-share-button-row button {
@@ -173,7 +199,7 @@
     border-color: rgba(245, 96, 44, 0.67);
 }
 
-.panel-heading a {
+.panel-primary .panel-heading a {
     color: white;
 }
 
@@ -308,6 +334,14 @@
     display: block;
 }
 
+.user-activity-panel {
+    border-top: 1px solid white;
+}
+
+.user-activity-panel h3 {
+    margin-top: 15px;
+}
+
 .user-content-panel {
     margin-top: 25px;
 }
@@ -325,6 +359,53 @@
     word-wrap: break-word;
 }
 
+@media screen and (max-width: 992px) {
+    .activity-box-container {
+        width: 50%;
+    }
+
+    .user-info-panel {
+        text-align: center;
+    }
+
+    .user-content-panel {
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .content-panel {
+        margin: 0px 15px 15px;
+    }
+
+    .navbar-link {
+        margin-left: 15px;
+    }
+
+    .search-result-publisher-text {
+        max-width: 30vw;
+    }
+
+    .thumbnail-image {
+        max-width: 30vw;
+    }
+
+    .user-content-panel {
+        margin-top: 25px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .activity-box-container {
+        width: 100%;
+    }
+
+    .activity-box .panel-body .picture-container {
+        margin-top: 10px;
+        height: auto;
+    }
+}
+
 @media screen and (max-width: 480px) {
     .btn-half {
         width: 48%;
@@ -337,7 +418,7 @@
         padding: 10px 18px;
     }
 
-    #landing-page>h1 {
+    #landing-page h1 {
         font-size: 48px;
     }
 
@@ -355,34 +436,6 @@
 
     .search-results-container h4 {
         margin-top: 0px;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .content-panel {
-        margin: 0px 15px 15px;
-    }
-
-    .search-result-publisher-text {
-        max-width: 30vw;
-    }
-
-    .thumbnail-image {
-        max-width: 30vw;
-    }
-
-    .user-content-panel {
-        margin-top: 25px;
-    }
-}
-
-@media screen and (max-width: 992px) {
-    .user-info-panel {
-        text-align: center;
-    }
-
-    .user-content-panel {
-        margin-top: 15px;
     }
 }
 
