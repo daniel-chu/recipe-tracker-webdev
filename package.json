@@ -7,7 +7,6 @@
     "angular": "^1.6.5",
     "angular-animate": "^1.6.5",
     "angular-sanitize": "^1.6.5",
-    "angular-ui-bootstrap": "^2.5.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
