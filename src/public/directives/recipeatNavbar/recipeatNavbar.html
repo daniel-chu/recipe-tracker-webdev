@@ -2,6 +2,11 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
+            <div ng-hide="isOnLandingPage()" class="navbar-text pull-left">
+                <a class="navbar-link" ng-click="goBack()">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
             <a class="navbar-brand" href="#">RecipEat</a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-navigationbar">
                 <span class="icon-bar"></span>

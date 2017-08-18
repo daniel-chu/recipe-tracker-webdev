@@ -37,7 +37,7 @@ function editComment(req, res) {
     var comment = req.body.comment;
 
     CommentModel.updateComment(commentId, comment).then(function() {
-        res.send(204);
+        res.sendStatus(204);
     });
 }
 
@@ -45,6 +45,6 @@ function deleteComment(req, res) {
     var commentId = req.params.commentId;
 
     CommentModel.deleteComment(commentId).then(function() {
-        res.send(204);
+        res.sendStatus(204);
     });
 }

@@ -3,11 +3,13 @@
         .directive('recipeatNavbar', ['$location', 'userService', recipeatNavbar]);
 
     function recipeatNavbar($location, userService) {
-        
-        var controller = function($scope, $rootScope, $location) {
+
+        var controller = function($scope, $rootScope, $window, $location) {
             $scope.searchRecipe = searchRecipe;
             $scope.redirectToLogin = redirectToLogin;
             $scope.redirectToRegister = redirectToRegister;
+            $scope.isOnLandingPage = isOnLandingPage;
+            $scope.goBack = goBack;
             $scope.logout = logout;
             $scope.user;
 
@@ -47,6 +49,18 @@
                     $rootScope.previousUrl = $location.url();
                 }
                 $location.url('/register');
+            }
+
+            function isOnLandingPage() {
+                return $location.url() === '/';
+            }
+
+            function goBack() {
+                if ($window.document.referrer.indexOf($location.host()) !== -1) {
+                    $window.history.back();
+                } else {
+                    $location.url('/');
+                }
             }
 
             function logout() {
