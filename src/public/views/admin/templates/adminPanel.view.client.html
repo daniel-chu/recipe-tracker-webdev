@@ -5,7 +5,10 @@
         <div ng-repeat="user in model.users" class="admin-user-list-row">
             <div class="row">
                 <span class="pull-left">
-                        <a href="#!/profile/{{user.username}}">{{user.username}}</a>
+                        <a href="#!/profile/{{user.username}}">
+                            {{user.username}}
+                        </a>
+                        <span ng-show="user.role === 'ADMIN'"> (admin)</span>
                     </span>
                 <span class="pull-right">
                         <a href="#!/admin/edit/{{user.username}}">Edit</a>

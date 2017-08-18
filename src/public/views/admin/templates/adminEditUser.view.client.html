@@ -57,6 +57,20 @@
         </div>
 
         <div class="row">
+            <div class="input-group">
+                <span class="input-group-addon">role</span>
+                <select id="role"
+                       ng-model="model.user.role"
+                       name="role"
+                       class="form-control"
+                       placeholder="role">
+                    <option>USER</option>
+                    <option>ADMIN</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
             <a class="btn btn-block btn-primary"
                role="button"
                ng-click="model.updateUser()">Update User</a>
