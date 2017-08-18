@@ -95,7 +95,7 @@
             <div ng-repeat="comment in model.comments">
                 <div class="panel panel-primary comment-panel">
                     <div class="panel-heading">
-                        {{comment.user.username}} on {{comment.dateCreated | date : 'h:mm a M/d/yy'}}
+                        <a href="#!/profile/{{comment.user.username}}">{{comment.user.username}}</a> on {{comment.dateCreated | date : 'h:mm a M/d/yy'}}
                         <span ng-show="model.isAllowedToDelete(comment.user.username)"
                               class="pull-right delete-comment-button"
                               ng-click="model.deleteComment(comment._id)">&times;</span>

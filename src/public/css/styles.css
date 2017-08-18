@@ -33,9 +33,7 @@
     background-color: rgba(255, 255, 255, 0.92);
     border-radius: 5px;
 
-    transition: max-height 1s;
     padding: 0px 10px 10px;
-    margin: 0px 15px 15px;
     min-height: 100px;
 }
 
@@ -162,7 +160,7 @@
     text-align: left;
 }
 
-.panel.comment-panel{
+.panel.comment-panel {
     margin-top: 20px;
 }
 
@@ -173,6 +171,10 @@
 .panel-primary.comment-panel .panel-heading {
     background-color: rgba(245, 96, 44, 0.67);
     border-color: rgba(245, 96, 44, 0.67);
+}
+
+.panel-heading a {
+    color: white;
 }
 
 .profile-picture-container {
@@ -357,6 +359,10 @@
 }
 
 @media screen and (max-width: 767px) {
+    .content-panel {
+        margin: 0px 15px 15px;
+    }
+
     .search-result-publisher-text {
         max-width: 30vw;
     }
