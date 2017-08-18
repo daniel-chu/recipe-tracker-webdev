@@ -57,7 +57,7 @@
         function postComment(comment) {
             commentService.postCommentForRecipeForUser(comment, vm.recipe, loggedInUser._id)
                 .then(function(comment) {
-                    $('#newComment').text('');
+                    $('.new-comment-textbox').val('');
                     retrieveComments();
                 });
         }

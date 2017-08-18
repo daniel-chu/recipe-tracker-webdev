@@ -65,11 +65,10 @@
             <div ng-show="loggedIn">
                 <div class="input-group hidden-xs">
                     <div class="form-group">
-                        <textarea id="newComment"
-                                  ng-model="model.newComment"
+                        <textarea ng-model="model.newComment"
                                   name="newComment"
                                   rows="3"
-                                  class="form-control"
+                                  class="form-control new-comment-textbox"
                                   placeholder="Write a comment about this recipe..."
                                   dc-on-enter="model.postComment(model.newComment)"></textarea>
                     </div>
@@ -79,11 +78,10 @@
 
                 <div class="visible-xs">
                     <div class="form-group">
-                        <textarea id="newComment"
-                                  ng-model="model.newComment"
+                        <textarea ng-model="model.newComment"
                                   name="newComment"
                                   rows="3"
-                                  class="form-control"
+                                  class="form-control new-comment-textbox"
                                   placeholder="Write a comment about this recipe..."
                                   dc-on-enter="model.postComment(model.newComment)"></textarea>
                     </div> 
