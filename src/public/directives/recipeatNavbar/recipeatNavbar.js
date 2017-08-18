@@ -4,7 +4,7 @@
 
     function recipeatNavbar($location, userService) {
 
-        var controller = function($scope, $rootScope, $window, $location) {
+        var controller = function($scope, $rootScope, $window, $location, $route) {
             $scope.searchRecipe = searchRecipe;
             $scope.redirectToLogin = redirectToLogin;
             $scope.redirectToRegister = redirectToRegister;
@@ -67,9 +67,9 @@
                 userService.logout().then(function() {
                     $rootScope.loggedIn = false;
                     $('#nav-bar-user-name').text('');
-
                     $rootScope.collapseNavbar();
                     $location.url('/');
+                    $route.reload()
                 });
             }
         }
