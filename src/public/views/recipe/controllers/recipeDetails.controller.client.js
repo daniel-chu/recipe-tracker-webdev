@@ -2,13 +2,17 @@
     angular.module('RecipEat')
         .controller('recipeDetailsController', recipeDetailsController);
 
-    function recipeDetailsController($routeParams, userService, recipeService, loggedInUser) {
+    function recipeDetailsController($routeParams, userService, recipeService, commentService, loggedInUser) {
         vm = this;
         vm.recipeId = $routeParams['recipeId'];
         vm.likeRecipe = likeRecipe;
         vm.shareRecipe = shareRecipe;
         vm.unlikeRecipe = unlikeRecipe;
         vm.unshareRecipe = unshareRecipe;
+
+        vm.postComment = postComment;
+        vm.isAllowedToDelete = isAllowedToDelete;
+        vm.deleteComment = deleteComment;
 
         function init() {
             recipeService.getRecipeDetails(vm.recipeId).then(function(result) {
@@ -22,6 +26,7 @@
                         vm.isRecipeShared = isShared;
                     });
                 }
+                retrieveComments();
             });
         }
 
@@ -47,6 +52,35 @@
             userService.unshareRecipeForUser(recipe, loggedInUser._id).then(function() {
                 vm.isRecipeShared = false;
             });
+        }
+
+        function postComment(comment) {
+            commentService.postCommentForRecipeForUser(comment, vm.recipe, loggedInUser._id)
+                .then(function(comment) {
+                    $('#newComment').text('');
+                    retrieveComments();
+                });
+        }
+
+        function isAllowedToDelete(username) {
+            return username === loggedInUser.username || loggedInUser.role === 'ADMIN';
+        }
+
+        function deleteComment(commentId) {
+            var confirmation = confirm('Are you sure you want to delete this comment?');
+            if (confirmation) {
+                commentService.deleteComment(commentId, vm.recipe.recipe_id)
+                    .then(function() {
+                        retrieveComments();
+                    });
+            }
+        }
+
+        function retrieveComments() {
+            commentService.getCommentsForRecipe(vm.recipeId)
+                .then(function(comments) {
+                    vm.comments = comments;
+                });
         }
 
         init();

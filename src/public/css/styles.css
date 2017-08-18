@@ -43,6 +43,10 @@
     margin: 7px 5px;
 }
 
+.delete-comment-button:hover {
+    cursor: pointer;
+}
+
 .dropdown-tab-label {
     float: none;
     display: inline-block;
@@ -152,6 +156,23 @@
 
 .nav-tabs>li>a {
     margin-right: 0;
+}
+
+#newCommentForm {
+    text-align: left;
+}
+
+.panel.comment-panel{
+    margin-top: 20px;
+}
+
+.panel-primary.comment-panel {
+    border-color: rgba(245, 96, 44, 0.67);
+}
+
+.panel-primary.comment-panel .panel-heading {
+    background-color: rgba(245, 96, 44, 0.67);
+    border-color: rgba(245, 96, 44, 0.67);
 }
 
 .profile-picture-container {

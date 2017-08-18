@@ -59,6 +59,54 @@
             </div>
         </div>
         <h3><span><a href={{model.recipe.source_url}} target="_blank">Read instructions HERE</a></span></h3>
+
+        <div class="comment-section">
+            <h1>Comments</h1>
+            <div ng-show="loggedIn">
+                <div class="input-group hidden-xs">
+                    <div class="form-group">
+                        <textarea id="newComment"
+                                  ng-model="model.newComment"
+                                  name="newComment"
+                                  rows="3"
+                                  class="form-control"
+                                  placeholder="Write a comment about this recipe..."
+                                  dc-on-enter="model.postComment(model.newComment)"></textarea>
+                    </div>
+                    <span class="input-group-addon btn btn-primary"
+                          ng-click="model.postComment(model.newComment)">Post</span>
+                </div>
+
+                <div class="visible-xs">
+                    <div class="form-group">
+                        <textarea id="newComment"
+                                  ng-model="model.newComment"
+                                  name="newComment"
+                                  rows="3"
+                                  class="form-control"
+                                  placeholder="Write a comment about this recipe..."
+                                  dc-on-enter="model.postComment(model.newComment)"></textarea>
+                    </div> 
+                    <button class="btn btn-block btn-default"
+                            ng-click="model.postComment(model.newComment)">Post</button>
+                </div>
+            </div>
+
+            <div ng-repeat="comment in model.comments">
+                <div class="panel panel-primary comment-panel">
+                    <div class="panel-heading">
+                        {{comment.user.username}} on {{comment.dateCreated | date : 'h:mm a M/d/yy'}}
+                        <span ng-show="model.isAllowedToDelete(comment.user.username)"
+                              class="pull-right delete-comment-button"
+                              ng-click="model.deleteComment(comment._id)">&times;</span>
+                    </div>
+                    <div class="panel-body">
+                        {{comment.comment}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 <div class="col-sm-2"></div>
