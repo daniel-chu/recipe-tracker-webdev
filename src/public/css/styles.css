@@ -37,6 +37,10 @@
     margin-left: 10px;
 }
 
+.border-top-white {
+    border-top: 1px solid white;
+}
+
 .btn.btn-blue {
     color: white;
     background-color: rgba(59, 89, 152, 0.92);
@@ -139,7 +143,8 @@
 
 #landing-page h1,
 #landing-page h2,
-#landing-page h3 {
+#landing-page h3,
+#landing-page h4 {
     color: white;
     outline-color: black;
     text-shadow: #000 0px 0px 4px;
@@ -332,10 +337,6 @@
 .user-action-button-panel {
     margin: 10px;
     display: block;
-}
-
-.user-activity-panel {
-    border-top: 1px solid white;
 }
 
 .user-activity-panel h3 {

@@ -9,7 +9,8 @@ var activityCollectionLimit = 5000;
 
 ActivityModel.createActivity = createActivity;
 ActivityModel.deleteActivity = deleteActivity;
-ActivityModel.getXActivitiesForUser = getXActivitiesForUser
+ActivityModel.getXActivitiesForUser = getXActivitiesForUser;
+ActivityModel.getXActivitiesGlobal = getXActivitiesGlobal;
 
 function createActivity(activity) {
     cleanUpActivityCollectionIfOverLimit();
@@ -45,6 +46,24 @@ function getXActivitiesForUser(start, end, userId) {
                 return activities;
             });
     });
+}
+
+// works the same way as for users, but finds the latest activities from any user
+function getXActivitiesGlobal(start, end) {
+    start = parseInt(start);
+    end = parseInt(end);
+    var limit = end - start + 1;
+
+    return ActivityModel.find()
+        .sort({ dateCreated: -1 })
+        .skip(start)
+        .limit(limit)
+        .populate('recipe')
+        .populate('user', 'username')
+        .exec()
+        .then(function(activities) {
+            return activities;
+        });
 }
 
 function cleanUpActivityCollectionIfOverLimit() {

@@ -6,12 +6,14 @@
         var vm = this;
         vm.user = loggedInUser;
         vm.createActivityBoxHeader = createActivityBoxHeader;
+        vm.retrieveUserSpecificActivities = retrieveUserSpecificActivities;
+        vm.retrieveGlobalActivities = retrieveGlobalActivities;
 
         function init() {
             if (vm.user) {
-                activityService.getXActivitiesForUser(0, 11, vm.user._id).then(function(activities) {
-                    vm.activities = activities;
-                });
+                retrieveUserSpecificActivities();
+            } else {
+                retrieveGlobalActivities();
             }
         }
 
@@ -24,6 +26,18 @@
                 header += 'shared...';
             }
             return header;
+        }
+
+        function retrieveUserSpecificActivities() {
+            activityService.getXActivitiesForUser(0, 11, vm.user._id).then(function(activities) {
+                vm.activities = activities;
+            });
+        }
+
+        function retrieveGlobalActivities() {
+            activityService.getXActivitiesGlobal(0, 5).then(function(activities) {
+                vm.activities = activities;
+            });
         }
 
         init();

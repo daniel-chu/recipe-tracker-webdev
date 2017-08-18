@@ -7,7 +7,8 @@
         var api = {
             createActivity: createActivity,
             deleteActivity: deleteActivity,
-            getXActivitiesForUser: getXActivitiesForUser
+            getXActivitiesForUser: getXActivitiesForUser,
+            getXActivitiesGlobal: getXActivitiesGlobal
         }
 
         return api;
@@ -40,6 +41,20 @@
 
         function getXActivitiesForUser(start, end, userId) {
             var url = '/api/user/' + userId + '/activity'
+            return $http({
+                method: 'GET',
+                url: url,
+                params: {
+                    start: start,
+                    end: end
+                }
+            }).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function getXActivitiesGlobal(start, end) {
+            var url = '/api/activity';
             return $http({
                 method: 'GET',
                 url: url,

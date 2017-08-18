@@ -1,9 +1,10 @@
 var app = require('../../express');
 var ActivityModel = require('../models/activity/activity.model.server.js');
 
-app.get('/api/user/:userId/activity', getXActivitiesForUser);
 app.post('/api/activity/:userId/:recipeId', createActivity);
 app.delete('/api/activity/:userId/:recipeId', deleteActivity);
+app.get('/api/user/:userId/activity', getXActivitiesForUser);
+app.get('/api/activity/', getXActivitiesGlobal);
 
 function createActivity(req, res) {
     var userId = req.params.userId;
@@ -43,6 +44,15 @@ function getXActivitiesForUser(req, res) {
     var end = req.query.end;
 
     ActivityModel.getXActivitiesForUser(start, end, userId).then(function(activities) {
+        res.send(activities);
+    });
+}
+
+function getXActivitiesGlobal(req, res) {
+    var start = req.query.start;
+    var end = req.query.end;
+
+    ActivityModel.getXActivitiesGlobal(start, end).then(function(activities) {
         res.send(activities);
     });
 }

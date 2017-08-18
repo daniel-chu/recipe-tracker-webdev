@@ -4,8 +4,12 @@
             <h1>RecipEat</h1>
             <h3>An easy way to find, track, and share recipes you love.</h3>
         </div>
-        <div ng-show="loggedIn" class="user-activity-panel clearfix">
-            <h3>Activity Stream</h3>
+        <div ng-show="!loggedIn" class="border-top-white">
+            <h3>Get started! Register <a href="#!/register">Here</a></h3>
+            <h4>Find a recipe using the search bar above, or see what our users are up to below.</h4>
+        </div>
+        <div class="user-activity-panel border-top-white clearfix">
+            <h3>Activity Feed</h3>
             <div class="activity-box-container" ng-repeat="activity in model.activities">
                 <div class="panel panel-warning activity-box">
                     <div class="panel-heading">
