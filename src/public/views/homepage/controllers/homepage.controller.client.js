@@ -9,8 +9,7 @@
 
         function init() {
             if (vm.user) {
-                activityService.getXActivitiesForUser(0, 9, vm.user._id).then(function(activities) {
-                    console.log(activities);
+                activityService.getXActivitiesForUser(0, 11, vm.user._id).then(function(activities) {
                     vm.activities = activities;
                 });
             }
