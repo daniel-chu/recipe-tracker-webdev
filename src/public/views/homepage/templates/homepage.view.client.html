@@ -23,8 +23,8 @@
                     <div class="panel-body">
                         <a href="#!/recipe/{{activity.recipe.recipe_id}}"
                            data-toggle="tooltip"
-                           title="{{activity.recipe.title}}">
-                            {{activity.recipe.title}}
+                           title="{{activity.recipe.title}}"
+                           ng-bind-html="activity.recipe.title">
                         </a>
                         <div class="picture-container">
                             <a href="#!/recipe/{{activity.recipe.recipe_id}}">
