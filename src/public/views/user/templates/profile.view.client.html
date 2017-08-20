@@ -115,7 +115,7 @@
                                 <div ng-repeat="recipe in model.sharedRecipes">
                                     <div class="profile-tab-display-object">
                                         <img ng-src={{recipe.image_url}} width="50px">
-                                        <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                        <a href="#!/recipe/{{recipe.recipe_id}}" ng-bind-html="recipe.title"></a>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                 <div ng-repeat="recipe in model.likedRecipes">
                                     <div class="profile-tab-display-object">
                                         <img ng-src={{recipe.image_url}} width="50px">
-                                        <a href="#!/recipe/{{recipe.recipe_id}}">{{recipe.title}}</a>
+                                        <a href="#!/recipe/{{recipe.recipe_id}}" ng-bind-html="recipe.title"></a>
                                     </div>                                    
                                 </div>
                             </div>
