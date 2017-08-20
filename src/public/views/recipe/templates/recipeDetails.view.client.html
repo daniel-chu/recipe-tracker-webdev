@@ -89,6 +89,9 @@
                             ng-click="model.postComment(model.newComment)">Post</button>
                 </div>
             </div>
+            <div ng-show="model.comments.length === 0">
+                No comments yet...
+            </div>
 
             <div ng-repeat="comment in model.comments">
                 <div class="panel panel-primary comment-panel">
