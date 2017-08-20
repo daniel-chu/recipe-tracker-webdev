@@ -22,23 +22,23 @@ app.get('/auth/google', loginGoogle);
 
 app.post('/api/logout', logout);
 app.get('/api/getLoggedInUser', getLoggedInUser);
-app.post('/api/validatepw', validatePassword);
-app.put('/api/updatePassword', updatePassword);
+app.post('/api/validatepw', auth, validatePassword);
+app.put('/api/updatePassword', auth, updatePassword);
 
 app.post('/api/user', createUser);
-app.post('/api/admin/user', createUserNoLogin);
+app.post('/api/admin/user', auth, createUserNoLogin);
 app.get('/api/user', findUserByUsername);
 app.get('/api/users', findAllUsers);
-app.put('/api/user/:userId', updateUser);
-app.delete('/api/user/:userId', deleteUser);
+app.put('/api/user/:userId', auth, updateUser);
+app.delete('/api/user/:userId', auth, deleteUser);
 
-app.post('/api/user/:userId/follow/:followedUserId', createFollowFromUserToUser);
-app.delete('/api/user/:userId/follow/:followedUserId', deleteFollowFromUserToUser);
+app.post('/api/user/:userId/follow/:followedUserId', auth, createFollowFromUserToUser);
+app.delete('/api/user/:userId/follow/:followedUserId', auth, deleteFollowFromUserToUser);
 
-app.post('/api/user/:userId/like/:recipeId', likeRecipeForUser);
-app.post('/api/user/:userId/share/:recipeId', shareRecipeForUser);
-app.delete('/api/user/:userId/like/:recipeId', unlikeRecipeForUser);
-app.delete('/api/user/:userId/share/:recipeId', unshareRecipeForUser);
+app.post('/api/user/:userId/like/:recipeId', auth, likeRecipeForUser);
+app.post('/api/user/:userId/share/:recipeId', auth, shareRecipeForUser);
+app.delete('/api/user/:userId/like/:recipeId', auth, unlikeRecipeForUser);
+app.delete('/api/user/:userId/share/:recipeId', auth, unshareRecipeForUser);
 
 app.get('/api/user/:userId/following', getUsersFollowing);
 app.get('/api/user/:userId/followers', getFollowers);
