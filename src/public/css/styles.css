@@ -20,6 +20,11 @@
     overflow: hidden;
 }
 
+.activity-box .panel-heading {
+    background-color: rgba(255, 110, 25, 0.18);
+    border-color: rgba(255, 110, 25, 0.18);
+}
+
 .activity-box .panel-body .picture-container {
     margin-top: 10px;
     height: 200px;
